@@ -14,15 +14,19 @@
 package vn.cybersoft.obs.android.activities;
 
 
+import vn.cybersoft.obs.android.R;
+import vn.cybersoft.obs.android.database.ModeDbAdapter;
 import vn.cybersoft.obs.android.fragments.AboutFragment;
 import vn.cybersoft.obs.android.fragments.BatteryInfoFragment;
 import vn.cybersoft.obs.android.fragments.ChargeFragment;
 import vn.cybersoft.obs.android.fragments.ConsumptionFragment;
 import vn.cybersoft.obs.android.fragments.MainMenuFragment;
 import vn.cybersoft.obs.android.fragments.OptimizationFragment;
+import vn.cybersoft.obs.android.services.BatteryStatusService;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -55,20 +59,14 @@ public class MainActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-/*		if(null != savedInstanceState) {
-			mCurrentFragment = getSupportFragmentManager().getFragment(savedInstanceState, "mCurrentFragment"); 
-		}
-		
-		if(null == mCurrentFragment) {
-			mCurrentFragment = new BatteryInfoFragment();
-		}
-		*/
-		
 		if(null != savedInstanceState) {
 			currentFragment = ScreenList.valueOf(savedInstanceState.containsKey(CURRENT_FRAGMENT) ? 
 						savedInstanceState.getString(CURRENT_FRAGMENT) : currentFragment.name());
 		}
-
+		
+		// start application forground service
+		Intent i = new Intent(this, BatteryStatusService.class);
+		startService(i);
 
 		// set the Behind View
 		setBehindContentView(R.layout.behind_layout);
@@ -83,7 +81,6 @@ public class MainActivity extends BaseActivity {
 		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN); 
 		
 		setSlidingActionBarEnabled(false);
-		
 	}
 	
 	@Override

@@ -15,7 +15,7 @@ License for the specific language governing permissions and limitations under
 the License.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_frame"
+    android:id="@+id/main_menu_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -24,8 +24,6 @@ the License.
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:divider="@null"
-        android:choiceMode="singleChoice"
-        android:listSelector="@drawable/menu_list_selector"
         android:layout_alignParentTop="true" >
     </ListView>
     

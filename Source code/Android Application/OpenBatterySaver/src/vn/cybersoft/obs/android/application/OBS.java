@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 University of Washington
+ * Copyright (C) 2014 €yber$oft Team
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -13,6 +13,7 @@
  */
 package vn.cybersoft.obs.android.application;
 
+import vn.cybersoft.obs.android.database.ModeDbAdapter;
 import android.app.Application;
 
 /**
@@ -20,8 +21,9 @@ import android.app.Application;
  *
  */
 public class OBS extends Application {
-	
 	private static OBS singleton = null;
+	
+	private ModeDbAdapter mModeDbAdapter;
 	
 	public static OBS getInstance() {
 		return singleton;
@@ -31,5 +33,11 @@ public class OBS extends Application {
 	public void onCreate() {
 		super.onCreate();
 		singleton = this;
+		mModeDbAdapter = new ModeDbAdapter();
 	}
+
+	public ModeDbAdapter getModeDbAdapter() {
+		return mModeDbAdapter;
+	}
+
 }

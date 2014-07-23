@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 University of Washington
+ * Copyright (C) 2014 €yber$oft Team
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -11,21 +11,19 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
+
 package vn.cybersoft.obs.android.adapters;
 
-import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 import java.util.List;
 
-import vn.cybersoft.obs.android.activities.R;
-import vn.cybersoft.obs.android.models.MainMenuItem;
+import vn.cybersoft.obs.android.R;
+import vn.cybersoft.obs.android.models.MainMenuListRow;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,12 +31,12 @@ import android.widget.TextView;
  * @author Luan Vu
  *
  */
-public class MainMenuItemAdapter extends ArrayAdapter<MainMenuItem> {
+public class MainMenuItemAdapter extends ArrayAdapter<MainMenuListRow> {
 
 	private ImageView image;
 	private TextView caption;
 	//private Button caption;
-	private List<MainMenuItem> items = new ArrayList<MainMenuItem>();
+	private List<MainMenuListRow> items = new ArrayList<MainMenuListRow>();
 
 	/**
 	 * @param context
@@ -50,7 +48,7 @@ public class MainMenuItemAdapter extends ArrayAdapter<MainMenuItem> {
 	}
 	
 	@Override
-	public void add(MainMenuItem object) {
+	public void add(MainMenuListRow object) {
 		items.add(object);
 		super.add(object);
 	}
@@ -62,7 +60,7 @@ public class MainMenuItemAdapter extends ArrayAdapter<MainMenuItem> {
 	}
 	
 	@Override
-	public MainMenuItem getItem(int position) {
+	public MainMenuListRow getItem(int position) {
 		return items.get(position);
 	}
 	
@@ -75,7 +73,7 @@ public class MainMenuItemAdapter extends ArrayAdapter<MainMenuItem> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView = convertView;
 		
-		if(null == rowView) {
+		if (null == rowView) {
 			LayoutInflater inflater = (LayoutInflater)this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			rowView = inflater.inflate(R.layout.main_menu_list_row, parent, false);
 		}

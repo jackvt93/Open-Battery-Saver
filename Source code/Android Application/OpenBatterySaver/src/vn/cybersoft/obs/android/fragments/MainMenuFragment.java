@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 University of Washington
+ * Copyright (C) 2014 €yber$oft Team
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -13,11 +13,11 @@
  */
 package vn.cybersoft.obs.android.fragments;
 
+import vn.cybersoft.obs.android.R;
 import vn.cybersoft.obs.android.activities.MainActivity;
-import vn.cybersoft.obs.android.activities.R;
 import vn.cybersoft.obs.android.activities.MainActivity.ScreenList;
 import vn.cybersoft.obs.android.adapters.MainMenuItemAdapter;
-import vn.cybersoft.obs.android.models.MainMenuItem;
+import vn.cybersoft.obs.android.models.MainMenuListRow;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -33,7 +33,7 @@ import android.widget.ListView;
  * 
  */
 public class MainMenuFragment extends Fragment implements OnItemClickListener {
-	private static final String TAG = "MainMenuFragment";
+	private static final String t = "MainMenuFragment";
 	
 	private static final int LAYOUT_ID = R.layout.main_menu_fragment;
 
@@ -46,27 +46,25 @@ public class MainMenuFragment extends Fragment implements OnItemClickListener {
 	private ListView mMenu;
 	private ListView mSecondMenu;
 	
-	private View mLastMenuView;
-	private int mLastMenuColor;
-	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(LAYOUT_ID, container, false);
 
-		mMenu = (ListView) view.findViewById(R.id.menuList);
 		MainMenuItemAdapter adapter = new MainMenuItemAdapter(getActivity(),
 				R.layout.main_menu_list_row);
-		adapter.add(new MainMenuItem(MENU_BATTERY_INFO,
+		adapter.add(new MainMenuListRow(MENU_BATTERY_INFO,
 				R.drawable.ic_action_battery,
 				getString(R.string.menu_battery_info)));
-		adapter.add(new MainMenuItem(MENU_OPTIMIZATION,
+		adapter.add(new MainMenuListRow(MENU_OPTIMIZATION,
 				R.drawable.ic_action_flash_on,
 				getString(R.string.menu_caption_optimization)));
-		adapter.add(new MainMenuItem(MENU_CHARGE, R.drawable.ic_action_battery,
+		adapter.add(new MainMenuListRow(MENU_CHARGE, R.drawable.ic_action_battery,
 				getString(R.string.menu_caption_charge)));
-		adapter.add(new MainMenuItem(MENU_CONSUMPTION, R.drawable.ic_action_battery,
+		adapter.add(new MainMenuListRow(MENU_CONSUMPTION, R.drawable.ic_action_battery,
 				getString(R.string.menu_caption_consumption)));
+		
+		mMenu = (ListView) view.findViewById(R.id.menuList);
 		mMenu.setAdapter(adapter);
 		mMenu.setOnItemClickListener(this);
 		
@@ -83,13 +81,6 @@ public class MainMenuFragment extends Fragment implements OnItemClickListener {
 		
 		if(activity instanceof MainActivity) {
 			MainMenuItemAdapter adapter = (MainMenuItemAdapter)parent.getAdapter();
-			if(mLastMenuView != null) {
-				mLastMenuView.setBackgroundColor(mLastMenuColor);
-				view.setBackgroundColor(getResources().getColor(R.color.nephritis)); 
-				mLastMenuView = view;
-			} else {
-				view.setBackgroundColor(getResources().getColor(R.color.nephritis)); 
-			}
 			switch (adapter.getItem(position).id) {
 			case MENU_BATTERY_INFO:
 				((MainActivity)activity).swapToFragmentView(ScreenList.BATTERY_INFO);

@@ -13,6 +13,8 @@
  */
 package vn.cybersoft.obs.android.activities;
 
+import vn.cybersoft.obs.android.R;
+
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -52,8 +54,7 @@ public class BaseActivity extends SlidingFragmentActivity {
 
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE | 
-				ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_USE_LOGO);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP);
 		actionBar.show();
 
 	}
