@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <LinearLayout 
+        android:id="@+id/linearlayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp">
+        <ImageButton 
+            android:id="@+id/addModeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_add_mode"
+            android:layout_marginRight="5dp"
+			android:contentDescription="@null" />
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/add_new_mode"/>
+    </LinearLayout>
+    
+    <ListView 
+        android:id="@+id/listMode"
+        android:layout_below="@+id/linearlayout1"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent">
+    </ListView>
+
+</RelativeLayout>
