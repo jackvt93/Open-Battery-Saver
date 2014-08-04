@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-	<style name="OBS" parent="Theme.Sherlock.Light">
-	    <item name="homeAsUpIndicator">@drawable/ic_drawer</item>
-	</style>
-	
-	
+
+    <style name="OBS" parent="Theme.Sherlock.Light">
+        <item name="homeAsUpIndicator">@drawable/ic_drawer</item>
+    </style>
+
+    <style name="MessageBoxTheme" parent="android:Theme.Holo.Light.Dialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowSoftInputMode">stateAlwaysHidden</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="actionBarSize">40dp</item>
+    </style>
+    
 </resources>

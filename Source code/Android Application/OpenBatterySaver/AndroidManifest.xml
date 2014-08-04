@@ -40,6 +40,15 @@
         </activity>
 
         <service android:name="vn.cybersoft.obs.android.services.BatteryStatusService" />
+
+        <activity
+            android:name="vn.cybersoft.obs.android.activities.MessageBoxActivity"
+            android:theme="@style/MessageBoxTheme" >
+        </activity>
+        <activity
+            android:name="vn.cybersoft.obs.android.activities.SwitchModeConfirmActivity"
+            android:theme="@style/MessageBoxTheme" >
+        </activity>
     </application>
 
 </manifest>

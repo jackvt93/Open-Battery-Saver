@@ -54,7 +54,7 @@ public class BaseActivity extends SlidingFragmentActivity {
 
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_USE_LOGO);
 		actionBar.show();
 
 	}

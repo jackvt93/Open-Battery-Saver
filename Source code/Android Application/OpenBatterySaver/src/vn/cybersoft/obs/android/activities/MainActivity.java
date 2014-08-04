@@ -15,7 +15,6 @@ package vn.cybersoft.obs.android.activities;
 
 
 import vn.cybersoft.obs.android.R;
-import vn.cybersoft.obs.android.database.ModeDbAdapter;
 import vn.cybersoft.obs.android.fragments.AboutFragment;
 import vn.cybersoft.obs.android.fragments.BatteryInfoFragment;
 import vn.cybersoft.obs.android.fragments.ChargeFragment;
@@ -65,8 +64,8 @@ public class MainActivity extends BaseActivity {
 		}
 		
 		// start application forground service
-		Intent i = new Intent(this, BatteryStatusService.class);
-		startService(i);
+		//Intent i = new Intent(this, BatteryStatusService.class);
+		//startService(i);
 
 		// set the Behind View
 		setBehindContentView(R.layout.behind_layout);
@@ -79,7 +78,6 @@ public class MainActivity extends BaseActivity {
 		// customize the SlidingMenu
 		getSlidingMenu().setMode(SlidingMenu.LEFT);
 		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN); 
-		
 		setSlidingActionBarEnabled(false);
 	}
 	
