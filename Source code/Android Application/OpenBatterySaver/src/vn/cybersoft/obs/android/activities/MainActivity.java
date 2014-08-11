@@ -79,6 +79,8 @@ public class MainActivity extends BaseActivity {
 		getSlidingMenu().setMode(SlidingMenu.LEFT);
 		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN); 
 		setSlidingActionBarEnabled(false);
+		
+		startActivity(new Intent(this, ScheduleModeTimeActivity.class));  
 	}
 	
 	@Override

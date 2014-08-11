@@ -15,23 +15,32 @@ package vn.cybersoft.obs.android.fragments;
 
 import vn.cybersoft.obs.android.R;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.preference.CheckBoxPreference;
+import android.preference.SwitchPreference;
+import android.support.v4.preference.PreferenceFragment;
 
 /**
  * @author Luan Vu (hlvu.cybersoft@gmail.com)
  *
  */
-public class OptimalSmartFragment extends Fragment {
-	public static final int LAYOUT_ID = R.layout.optimal_smart_fragment;
+public class OptimalSmartFragment extends PreferenceFragment {
+	public static final String KEY_SMART_OPTIMAZATION_ENABLE = "smart_optimization_enable";
+	public static final String KEY_AUTO_CLEAR_APP_SCREEN_LOCK = "auto_clear_apps_screen_lock";
 	
+	private SwitchPreference mSmartOptimizationEnablePreference;
+	private CheckBoxPreference mAutoClearAppPreference;
 	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(LAYOUT_ID, container, false);
-		return view;
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Load the preferences from an XML resource
+        addPreferencesFromResource(R.xml.smart_optimal_preferences);
+        
+        mAutoClearAppPreference = (CheckBoxPreference) findPreference(KEY_AUTO_CLEAR_APP_SCREEN_LOCK);
+        
+    }
+
+	
+
 }

@@ -14,7 +14,15 @@
 package vn.cybersoft.obs.android.application;
 
 import vn.cybersoft.obs.android.database.ModeDbAdapter;
+import vn.cybersoft.obs.android.fragments.OptimalSmartFragment;
+import vn.cybersoft.obs.android.receivers.ScreenStateReceiver;
+import vn.cybersoft.obs.android.services.BatteryStatusService;
 import android.app.Application;
+import android.content.BroadcastReceiver;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 /**
  * @author Luan Vu
@@ -25,8 +33,14 @@ public class OBS extends Application {
 	
 	private ModeDbAdapter mModeDbAdapter;
 	
+	private SharedPreferences mPreferences;
+	
 	public static OBS getInstance() {
 		return singleton;
+	}
+	
+	public SharedPreferences getSharePreferences() {
+		return mPreferences;
 	}
 	
 	@Override
@@ -34,10 +48,15 @@ public class OBS extends Application {
 		super.onCreate();
 		singleton = this;
 		mModeDbAdapter = new ModeDbAdapter();
+		mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+		
+		// start application forground service
+		Intent i = new Intent(this, BatteryStatusService.class);
+		startService(i);
 	}
 
 	public ModeDbAdapter getModeDbAdapter() {
 		return mModeDbAdapter;
 	}
-
+	
 }

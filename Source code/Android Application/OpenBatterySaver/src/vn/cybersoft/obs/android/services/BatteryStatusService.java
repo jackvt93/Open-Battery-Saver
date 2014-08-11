@@ -15,11 +15,16 @@ package vn.cybersoft.obs.android.services;
 
 import vn.cybersoft.obs.android.R;
 import vn.cybersoft.obs.android.activities.MainActivity;
+import vn.cybersoft.obs.android.application.OBS;
+import vn.cybersoft.obs.android.fragments.OptimalSmartFragment;
+import vn.cybersoft.obs.android.receivers.ScreenStateReceiver;
 import vn.cybersoft.obs.android.utilities.DisplayUtils;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.IBinder;
 import android.widget.RemoteViews;
 
@@ -43,9 +48,23 @@ public class BatteryStatusService extends Service {
 		RemoteViews contentViews = new RemoteViews(getPackageName(), LAYOUT_ID);
 		contentViews.setOnClickPendingIntent(R.id.app_icon, startAppPintent);
 		
+		registryOptimizationReceiver();
+		
 		Notification notification = DisplayUtils.createNotification(contentViews, R.drawable.ic_launcher);
 		startForeground(ONGOING_NOTIFICATION_ID, notification);
 		return START_STICKY;
+	}
+	
+	private void registryOptimizationReceiver() {
+		// Auto clear apps when screen clock receiver
+		boolean autoClearAppScreenOff = OBS.getInstance().getSharePreferences().getBoolean(OptimalSmartFragment.KEY_AUTO_CLEAR_APP_SCREEN_LOCK, true);
+		if(autoClearAppScreenOff) {
+			IntentFilter intentFilter = new IntentFilter();
+			intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
+			intentFilter.addAction(Intent.ACTION_SCREEN_ON);
+			BroadcastReceiver receiver = new ScreenStateReceiver();
+			registerReceiver(receiver, intentFilter); 
+		}
 	}
 
 }

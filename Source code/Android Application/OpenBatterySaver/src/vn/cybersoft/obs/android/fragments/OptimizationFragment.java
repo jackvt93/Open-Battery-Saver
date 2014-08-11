@@ -53,6 +53,7 @@ public class OptimizationFragment extends Fragment {
 			mTabHost.getTabWidget().getChildAt(i).setBackgroundResource(R.drawable.tab_indicator_ab);
 		}
 		
+		
 		return view;
 	}
 }

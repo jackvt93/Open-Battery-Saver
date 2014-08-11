@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Open Battery Saver</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_battery_info">Thông tin pin</string>
+    <string name="menu_caption_optimization">Tối ưu</string>
+    <string name="menu_caption_charge">Sạc pin</string>
+    <string name="menu_caption_consumption">Tiêu dùng</string>
+    <string name="menu_second_caption_help">Trợ giúp</string>
+    <string name="menu_second_caption_about">Thông tin</string>
+    <string name="mode_desc_short">User this mode if you want device always high performance</string>
+    <string name="mode_desc_long">This mode should used if you want save battery</string>
+    <string name="mode_desc_middle">This mode is middle</string>
+    <string name="mode_name_short">Short</string>
+    <string name="mode_name_long">Long</string>
+    <string name="mode_name_middle">Middle</string>
+    <string name="none">None</string>
+    <string name="seconds">giây</string>
+    <string name="on">Mớ</string>
+    <string name="off">Tắt</string>
+    <string name="smart_enable">Kích hoạt chế độ tối ưu thông minh</string>
+    <string name="auto_clear_lock_screen_title">Khóa màn hình tự động dọn dẹp ứng dụng</string>
+    <string name="auto_clear_lock_screen_summany">Tự động dọn dẹp các ứng dụng khi khóa màn hình</string>
+
+    <string name="mode">Tối ưu thông minh</string>
+    <string name="add_new_mode">Thêm mới chế độ tùy chọn</string>
+    <string name="no_items_display">Không có nội dung hiển thị.</string>
+    <string name="smart">Tối ưu thông minh</string>
+    <string name="screen_brightness">Độ sáng</string>
+    <string name="screen_timeout">Thời gian sáng</string>
+    <string name="vibrate">Chế độ rung</string>
+    <string name="wifi">Wi-fi</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="sync">Sync</string>
+    <string name="haptic_feedback">Haptic Feedback</string>
+    
+    
+    <!--  Strings for possible PreferenceActivity Back/Next buttons -->
+    <string name="back_button_label">Back</string>
+    <string name="next_button_label">Next</string>
+
+    <!-- Optional button to Skip a PreferenceActivity [CHAR LIMIT=20] -->
+    <string name="skip_button_label">Skip</string>
+</resources>
