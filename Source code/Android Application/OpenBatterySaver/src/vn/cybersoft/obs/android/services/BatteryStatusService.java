@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 €yber$oft Team
+ * Copyright (C) 2014 IUH €yber$oft Team
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -16,7 +16,7 @@ package vn.cybersoft.obs.android.services;
 import vn.cybersoft.obs.android.R;
 import vn.cybersoft.obs.android.activities.MainActivity;
 import vn.cybersoft.obs.android.application.OBS;
-import vn.cybersoft.obs.android.fragments.OptimalSmartFragment;
+import vn.cybersoft.obs.android.fragments.SmartTabFragment;
 import vn.cybersoft.obs.android.receivers.ScreenStateReceiver;
 import vn.cybersoft.obs.android.utilities.DisplayUtils;
 import android.app.Notification;
@@ -57,7 +57,7 @@ public class BatteryStatusService extends Service {
 	
 	private void registryOptimizationReceiver() {
 		// Auto clear apps when screen clock receiver
-		boolean autoClearAppScreenOff = OBS.getInstance().getSharePreferences().getBoolean(OptimalSmartFragment.KEY_AUTO_CLEAR_APP_SCREEN_LOCK, true);
+		boolean autoClearAppScreenOff = OBS.getInstance().getSharePreferences().getBoolean(SmartTabFragment.KEY_AUTO_CLEAR_APP_SCREEN_LOCK, true);
 		if(autoClearAppScreenOff) {
 			IntentFilter intentFilter = new IntentFilter();
 			intentFilter.addAction(Intent.ACTION_SCREEN_OFF);

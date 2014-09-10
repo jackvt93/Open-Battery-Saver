@@ -1,9 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2014 IUH €yber$oft Team
+
+	 Licensed under the Apache License, Version 2.0 (the "License"); 
+	 you may not use this file except in compliance with the License. 
+	 You may obtain a copy of the License at
+
+		 http://www.apache.org/licenses/LICENSE-2.0
+
+	 Unless required by applicable law or agreed to in writing, software 
+	 distributed under the License is distributed on an "AS IS" BASIS, 
+	 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+	 See the License for the specific language governing permissions and 
+	 limitations under the License. 
+-->
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
     <string name="app_name">Open Battery Saver</string>
+    <string name="add_new_mode">Add new mode</string>
     <string name="action_settings">Settings</string>
-    <string name="add_time_schedule">Add schedule</string>
+    <string name="add_new_schedule_mode_time">Add new schedule</string>
+    <string name="auto_clear_apps_screen_lock_title">Screen Lock Auto-Clear</string>
+    <string name="auto_clear_apps_screen_lock_summany">Automatically clear apps when screen lock</string>
+    <string name="auto_clear_apps_title">Auto-Clear Apps</string>
+    <string name="auto_clear_apps_summany">Clearing apps on background can save battery</string>
+    <string name="delete_schedule">Delete schedule</string>
+    <string name="delete_schedule_confirm">This schedule will be deleted.</string>
+    <string name="save_schedule_err">You should select one mode for schedule</string>
+    <string name="enable_schedule">Turn schedule on</string>
+    <string name="disable_schedule">Turn schedule off</string>
+    <string name="edit_schedule">Edit schedule</string>
+    <string name="time_schedule_repeat">Repeat</string>
+    <string name="time_schedule_mode">Mode</string>
+    <string name="time">Time</string>
     <string name="menu_battery_info">Battery</string>
     <string name="menu_caption_optimization">Optimization</string>
     <string name="menu_caption_charge">Charge</string>
@@ -16,30 +44,26 @@
     <string name="mode_name_short">Short</string>
     <string name="mode_name_long">Long</string>
     <string name="mode_name_middle">Middle</string>
+    <string name="mode_schedules_summany">Automatically change modes based on time of day</string>
+    <string name="mode_schedules_title">Change modes by time of day</string>
     <string name="none">None</string>
-    <string name="seconds">seconds</string>
+    <string name="seconds">%d seconds</string>
+    <string name="percent_value">%1$d %%</string>
+    <string name="smart_enable">Smart optimization enable</string>
+    <string name="schedule_by_battery_level_summany">Automatically change modes according to battery level</string>
+    <string name="schedule_by_battery_level_title">Change modes by battery level</string>
+    <string name="no_items_display_time_schedules">Nothing available to display.\n\nTry add a new schedule for battery save</string>
+    <string name="save">Save</string>
+    <string name="accept">Switch</string>
+    <string name="cancel">Cancel</string>
     <string name="on">On</string>
     <string name="off">Off</string>
-    <string name="smart_enable">Smart optimization enable</string>
-    <string name="auto_clear_apps_screen_lock_title">Screen Lock Auto-Clear</string>
-    <string name="auto_clear_apps_screen_lock_summany">Automatically clear apps when screen lock</string>
-    <string name="auto_clear_apps_title">Auto-Clear Apps</string>
-    <string name="auto_clear_apps_summany">Clearing apps on background can save battery</string>
-    <string name="schedule_by_time_title">Change modes by time of day</string>
-    <string name="schedule_by_time_summany">Automatically change modes based on time of day</string>
-    <string name="time_to_change_mode_title">Time</string>
-    <string name="time_to_change_mode_summany"></string>
-    <string name="mode_to_change_by_time_title">Mode to change</string>
-    <string name="mode_to_change_by_time_summany"></string>
-    <string name="schedule_by_battery_level_title">Change modes by battery level</string>
-    <string name="schedule_by_battery_level_summany">Automatically change modes according to battery level</string>
     <string name="network_control_title">Network Usage Control</string>
     <string name="network_control_summany">Automatically turn off network when screen off</string>
     <string name="cpu_control_title">CPU Control</string>
     <string name="cpu_control_summany">Adjust CPU Frequence when screen locked</string>
-    <string name="mode">Mode</string>
-    <string name="add_new_mode">Add a mode</string>
     <string name="no_items_display">Nothing available to display.</string>
+    <string name="mode">Mode</string>
     <string name="smart">Smart</string>
     <string name="screen_brightness">Screen Brightness</string>
     <string name="screen_timeout">Screen Timeout</string>
@@ -48,6 +72,31 @@
     <string name="bluetooth">Bluetooth</string>
     <string name="sync">Sync</string>
     <string name="haptic_feedback">Haptic Feedback</string>
+    <string name="every_day">Every day</string>
+    <string name="never">Never</string>
+    <string name="mode_to_change">Mode: %s</string>
+    <string name="day_concat">", "</string>
+    <string name="temperature">Temperature</string>
+    <string name="voltage">Voltage</string>
+    <string name="capacity">Capacity</string>
+    <string name="technology">Technology</string>
+    <string name="celsius_symbol">\u2103</string>
+    <string name="voltage_symbol">V</string>
+    <string name="capacity_symbol">mAh</string>
+    <string name="button_optimize">Optimize</string>
+    <string name="time_left">Time left: </string>
+    <string name="hour_s">h</string>
+    <string name="min_s">m</string>
+    
+    <!-- Strings for optimal mode preferences -->
+    <string name="prefs_add_new_mode_title">Add new mode</string>
+    <string name="prefs_screen_brightness_title"></string>
+    <string name="prefs_screen_timeout_title"></string>
+    
+    <!-- Strings for optimal mode context menu -->
+    <string name="edit_mode">Edit mode</string>
+    <string name="delete_mode">Delete mode</string>
+    <string name="switch_mode">Switch</string>
 
     <!-- Strings for possible PreferenceActivity Back/Next buttons -->
     <string name="back_button_label">Back</string>
@@ -55,6 +104,5 @@
 
     <!-- Optional button to Skip a PreferenceActivity [CHAR LIMIT=20] -->
     <string name="skip_button_label">Skip</string>
-    <string name="hello_world">Hello world!</string>
 
 </resources>

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 €yber$oft Team
+ * Copyright (C) 2014 IUH €yber$oft Team
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -12,6 +12,9 @@
  * the License.
  */
 package vn.cybersoft.obs.android.fragments;
+
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingActivity;
+import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import vn.cybersoft.obs.android.R;
 import vn.cybersoft.obs.android.activities.MainActivity;
@@ -101,6 +104,7 @@ public class MainMenuFragment extends Fragment implements OnItemClickListener {
 				((MainActivity)activity).swapToFragmentView(ScreenList.ABOUT);
 				break;
 			}
+			((SlidingFragmentActivity) activity).getSlidingMenu().showContent();
 		}
 		
 

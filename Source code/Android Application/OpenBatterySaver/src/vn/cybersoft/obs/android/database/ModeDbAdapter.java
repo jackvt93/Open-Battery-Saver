@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 €yber$oft Team
+ * Copyright (C) 2014 IUH €yber$oft Team
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -19,7 +19,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import vn.cybersoft.obs.android.R;
 import vn.cybersoft.obs.android.application.OBS;
+import vn.cybersoft.obs.android.utilities.ReflectionUtils;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -55,11 +58,12 @@ public class ModeDbAdapter {
 	
 	private DatabaseHelper mDbHelper;
 	private SQLiteDatabase mDb; 
+	private Context mContext;
 	
 	private static class DatabaseHelper extends SQLiteOpenHelper {
 		
-		public DatabaseHelper(String databaseName) throws IOException {
-			super(OBS.getInstance().getApplicationContext(), databaseName, null, DATABASE_VERSION);
+		public DatabaseHelper(Context context, String databaseName) throws IOException {
+			super(context, databaseName, null, DATABASE_VERSION);
 			createDataBase();
 		}
 
@@ -158,16 +162,17 @@ public class ModeDbAdapter {
 	/**
 	 * 
 	 */
-	public ModeDbAdapter() {
-		mDb = getDbHelper().getWritableDatabase();
+	public ModeDbAdapter(Context context) {
+		mDb = getDbHelper(context).getWritableDatabase();
+		mContext = context;
 	}
 	
-	private DatabaseHelper getDbHelper() {
+	private DatabaseHelper getDbHelper(Context context) {
 		if (mDbHelper != null) {
 			return mDbHelper;
 		}
 		try {
-			mDbHelper = new DatabaseHelper(DATABASE_PATH + File.separator + DATABASE_NAME);
+			mDbHelper = new DatabaseHelper(context, DATABASE_PATH + File.separator + DATABASE_NAME);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -178,8 +183,37 @@ public class ModeDbAdapter {
 		return mDb.query(OP_MODE_TABLE_NAME, null, null, null, null, null, null);
 	}
 	
+	public Cursor fetchMode(long id, String[] columns) {
+		return mDb.query(OP_MODE_TABLE_NAME, columns, _ID + " = " + id, null, null, null, null);
+	}
+	
     public Cursor query(String selection, String[] selectionArgs) {
         return mDb.query(true, OP_MODE_TABLE_NAME, null, selection, selectionArgs, null, null, null, null);
+    }
+    
+    public String getModeNameStr(long id) {
+    	String[] columns = new String[] { NAME, CAN_EDIT };
+    	String ret = null;
+    	
+    	Cursor c = null;
+    	try {
+			c = fetchMode(id, columns);
+	    	if (c.getCount() > 0) {
+				c.moveToFirst();
+				boolean canEdit = Boolean.parseBoolean(c.getString(c.getColumnIndex(ModeDbAdapter.CAN_EDIT)));
+	        	if (!canEdit) {
+					int resId = ReflectionUtils.getResourceId(c.getString(c.getColumnIndex(ModeDbAdapter.NAME)), R.string.class);
+					ret = resId != -1 ? mContext.getString(resId) : c.getString(c.getColumnIndex(ModeDbAdapter.NAME));
+				} else {
+					ret = c.getString(c.getColumnIndex(ModeDbAdapter.NAME));
+				}
+			}
+		} finally {
+			if (c != null) {
+				c.close();
+			}
+		}
+    	return ret;
     }
 	
 }

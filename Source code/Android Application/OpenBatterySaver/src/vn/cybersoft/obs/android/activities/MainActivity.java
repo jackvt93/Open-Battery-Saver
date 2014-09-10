@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 University of Washington
+ * Copyright (C) 2014 IUH €yber$oft Team
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -21,12 +21,23 @@ import vn.cybersoft.obs.android.fragments.ChargeFragment;
 import vn.cybersoft.obs.android.fragments.ConsumptionFragment;
 import vn.cybersoft.obs.android.fragments.MainMenuFragment;
 import vn.cybersoft.obs.android.fragments.OptimizationFragment;
+import vn.cybersoft.obs.android.listeners.Callback;
+import vn.cybersoft.obs.android.models.BatteryInfo;
+import vn.cybersoft.obs.android.receivers.TimeScheduleReceiver;
 import vn.cybersoft.obs.android.services.BatteryStatusService;
+import vn.cybersoft.obs.android.utilities.Utils;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
+import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentManager.BackStackEntry;
@@ -63,10 +74,6 @@ public class MainActivity extends BaseActivity {
 						savedInstanceState.getString(CURRENT_FRAGMENT) : currentFragment.name());
 		}
 		
-		// start application forground service
-		//Intent i = new Intent(this, BatteryStatusService.class);
-		//startService(i);
-
 		// set the Behind View
 		setBehindContentView(R.layout.behind_layout);
 		getSupportFragmentManager().beginTransaction()
@@ -79,8 +86,6 @@ public class MainActivity extends BaseActivity {
 		getSlidingMenu().setMode(SlidingMenu.LEFT);
 		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN); 
 		setSlidingActionBarEnabled(false);
-		
-		startActivity(new Intent(this, ScheduleModeTimeActivity.class));  
 	}
 	
 	@Override
@@ -154,16 +159,26 @@ public class MainActivity extends BaseActivity {
 			}
 		}
 		
-		if(null == entry) {
+		if(null != entry) {
 			// flush backward, including the screen want to go back to
 			fragmentManager.popBackStackImmediate(currentFragment.name(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 		
 		// add transaction to show the screen we want
 		FragmentTransaction transaction = fragmentManager.beginTransaction();
-		transaction.replace(R.id.main_frame, fragment).commit();
-		getSlidingMenu().showContent();
-		
+		transaction.replace(R.id.main_frame, fragment);
+		transaction.addToBackStack(currentFragment.name());
+		transaction.commit();
+		levelSafeInvalidateOptionsMenu();
 	}
+	
+	  /**
+	   * Android Lint complains, but we are using Sherlock,
+	   * so this does exist for down-level devices.
+	   */
+	  @SuppressLint("NewApi") 
+	  private void levelSafeInvalidateOptionsMenu() {
+	    invalidateOptionsMenu();
+	  }
 
 }

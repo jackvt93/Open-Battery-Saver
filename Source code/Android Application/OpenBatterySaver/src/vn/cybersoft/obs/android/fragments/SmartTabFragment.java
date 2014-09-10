@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 €yber$oft Team
+ * Copyright (C) 2014 IUH €yber$oft Team
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -23,7 +23,7 @@ import android.support.v4.preference.PreferenceFragment;
  * @author Luan Vu (hlvu.cybersoft@gmail.com)
  *
  */
-public class OptimalSmartFragment extends PreferenceFragment {
+public class SmartTabFragment extends PreferenceFragment {
 	public static final String KEY_SMART_OPTIMAZATION_ENABLE = "smart_optimization_enable";
 	public static final String KEY_AUTO_CLEAR_APP_SCREEN_LOCK = "auto_clear_apps_screen_lock";
 	
@@ -35,7 +35,7 @@ public class OptimalSmartFragment extends PreferenceFragment {
         super.onCreate(savedInstanceState);
 
         // Load the preferences from an XML resource
-        addPreferencesFromResource(R.xml.smart_optimal_preferences);
+        addPreferencesFromResource(R.xml.smart_optimization_prefs);
         
         mAutoClearAppPreference = (CheckBoxPreference) findPreference(KEY_AUTO_CLEAR_APP_SCREEN_LOCK);
         

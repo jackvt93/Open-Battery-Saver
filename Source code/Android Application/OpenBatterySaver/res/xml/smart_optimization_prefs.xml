@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2014 IUH €yber$oft Team
+
+	 Licensed under the Apache License, Version 2.0 (the "License"); 
+	 you may not use this file except in compliance with the License. 
+	 You may obtain a copy of the License at
+
+		 http://www.apache.org/licenses/LICENSE-2.0
+
+	 Unless required by applicable law or agreed to in writing, software 
+	 distributed under the License is distributed on an "AS IS" BASIS, 
+	 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+	 See the License for the specific language governing permissions and 
+	 limitations under the License. 
+-->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <SwitchPreference
@@ -8,41 +22,49 @@
         android:switchTextOff="@string/off"
         android:switchTextOn="@string/on"
         android:title="@string/smart_enable" />
+    
 
+    <android.preference.TwoStatePreference
+		android:key="test"
+        android:title="test"
+        />
+    
+    <PreferenceScreen
+        android:dependency="smart_optimization_enable"
+        android:key="mode_schedules"
+        android:summary="@string/mode_schedules_summany"
+        android:title="@string/mode_schedules_title" >
+        <intent android:action="vn.cybersoft.obs.android.activities.ScheduleModeTimeActivity" />
+    </PreferenceScreen>
+
+    <PreferenceScreen
+        android:dependency="smart_optimization_enable"
+        android:key="schedule_by_battery_level"
+        android:summary="@string/schedule_by_battery_level_summany"
+        android:title="@string/schedule_by_battery_level_title" />
+    
+    
     <CheckBoxPreference
         android:defaultValue="true"
         android:dependency="smart_optimization_enable"
         android:key="auto_clear_apps_screen_lock"
         android:summary="@string/auto_clear_apps_screen_lock_summany"
         android:title="@string/auto_clear_apps_screen_lock_title" />
+    
     <CheckBoxPreference
         android:defaultValue="false"
         android:dependency="smart_optimization_enable"
         android:key="auto_clear_apps"
         android:summary="@string/auto_clear_apps_summany"
         android:title="@string/auto_clear_apps_title" />
-
-    <PreferenceScreen
-        android:dependency="smart_optimization_enable"
-        android:key="schedule_by_time"
-        android:summary="@string/schedule_by_time_summany"
-        android:title="@string/schedule_by_time_title" >
-        <intent
-            android:action="vn.cybersoft.obs.android.activities.ScheduleModeTimeActivity" />
-    </PreferenceScreen>
-
-    <CheckBoxPreference
-        android:defaultValue="true"
-        android:dependency="smart_optimization_enable"
-        android:key="schedule_by_battery_level"
-        android:summary="@string/schedule_by_battery_level_summany"
-        android:title="@string/schedule_by_battery_level_title" />
+    
     <CheckBoxPreference
         android:defaultValue="true"
         android:dependency="smart_optimization_enable"
         android:key="network_control"
         android:summary="@string/network_control_summany"
         android:title="@string/network_control_title" />
+    
     <CheckBoxPreference
         android:defaultValue="false"
         android:dependency="smart_optimization_enable"
