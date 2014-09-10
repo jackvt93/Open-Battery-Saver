@@ -16,7 +16,7 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="vn.cybersoft.obs.android"
-    android:versionCode="11"
+    android:versionCode="12"
     android:versionName="1.0" >
 
     <uses-sdk
