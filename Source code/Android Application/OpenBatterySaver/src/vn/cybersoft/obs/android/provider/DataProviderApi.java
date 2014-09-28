@@ -155,6 +155,62 @@ public final class DataProviderApi {
         public static final String MODE_ID = "modeid";
     }
     
+    protected interface PowerSchedulesColumns extends BaseColumns {
+        /**
+         * The content:// style URL for this table
+         */
+        public static final Uri CONTENT_URI =
+                Uri.parse("content://" + AUTHORITY + "/power_schedules");
+        
+        /**
+         * Battery level for switch mode. 0 - 100
+         * <P>Type: INTEGER</P>
+         */
+        public static final String BATTERY_LEVEL = "batterylevel";
+        
+        /**
+         * True if schedule is active
+         * <P>Type: BOOLEAN</P>
+         */
+        public static final String ENABLED = "enabled";
+        
+        /**
+         * Mode id to change when battery at specific level
+         * <P>Type: INTEGER </P>
+         */
+        public static final String MODE_ID = "modeid";
+    }
     
+    protected interface BatteryTracesColumns extends BaseColumns {
+        /**
+         * The content:// style URL for this table
+         */
+        public static final Uri CONTENT_URI =
+                Uri.parse("content://" + AUTHORITY + "/battery_traces");
+        
+        /**
+         * Hour in 24-hour localtime 0 - 23.
+         * <P>Type: INTEGER</P>
+         */
+        public static final String HOUR = "hour";
+        
+        /**
+         * Minutes in localtime 0 - 59
+         * <P>Type: INTEGER</P>
+         */
+        public static final String MINUTES = "minutes";
+        
+        /**
+         * Battery level 0 - 100
+         * <P>Type: INTEGER</P>
+         */
+        public static final String LEVEL = "level";
+        
+        /**
+         * Trace date. Format: yyyy-MM-dd
+         * <P>Type: TEXT</P>
+         */
+        public static final String DATE = "date";
+    }
 	
 }

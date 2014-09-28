@@ -23,40 +23,34 @@
         android:switchTextOn="@string/on"
         android:title="@string/smart_enable" />
     
-
-    <android.preference.TwoStatePreference
-		android:key="test"
-        android:title="test"
-        />
-    
     <PreferenceScreen
         android:dependency="smart_optimization_enable"
-        android:key="mode_schedules"
-        android:summary="@string/mode_schedules_summany"
-        android:title="@string/mode_schedules_title" >
+        android:summary="@string/time_schedule_summany"
+        android:title="@string/time_schedule_title" >
         <intent android:action="vn.cybersoft.obs.android.activities.ScheduleModeTimeActivity" />
     </PreferenceScreen>
 
     <PreferenceScreen
         android:dependency="smart_optimization_enable"
-        android:key="schedule_by_battery_level"
-        android:summary="@string/schedule_by_battery_level_summany"
-        android:title="@string/schedule_by_battery_level_title" />
+        android:summary="@string/power_schedule_summany"
+        android:title="@string/power_schedule_title" >
+        <intent android:action="vn.cybersoft.obs.android.activities.PowerScheduleActivity" />
+	</PreferenceScreen>
     
     
     <CheckBoxPreference
         android:defaultValue="true"
         android:dependency="smart_optimization_enable"
-        android:key="auto_clear_apps_screen_lock"
+        android:key="clear_apps_screen_lock"
         android:summary="@string/auto_clear_apps_screen_lock_summany"
-        android:title="@string/auto_clear_apps_screen_lock_title" />
+        android:title="@string/auto_clear_apps_screen_lock_title" /> 
     
-    <CheckBoxPreference
+<!--      <CheckBoxPreference
         android:defaultValue="false"
         android:dependency="smart_optimization_enable"
         android:key="auto_clear_apps"
         android:summary="@string/auto_clear_apps_summany"
-        android:title="@string/auto_clear_apps_title" />
+        android:title="@string/auto_clear_apps_title" />  -->
     
     <CheckBoxPreference
         android:defaultValue="true"
@@ -65,11 +59,11 @@
         android:summary="@string/network_control_summany"
         android:title="@string/network_control_title" />
     
-    <CheckBoxPreference
+<!--     <CheckBoxPreference
         android:defaultValue="false"
         android:dependency="smart_optimization_enable"
         android:key="cpu_control"
         android:summary="@string/cpu_control_summany"
-        android:title="@string/cpu_control_title" />
+        android:title="@string/cpu_control_title" /> -->
 
 </PreferenceScreen>

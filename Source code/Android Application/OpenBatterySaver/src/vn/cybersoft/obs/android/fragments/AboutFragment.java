@@ -14,11 +14,13 @@
 package vn.cybersoft.obs.android.fragments;
 
 import vn.cybersoft.obs.android.R;
+import vn.cybersoft.obs.android.utilities.Utils;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
 /**
  * @author Luan Vu
@@ -26,13 +28,35 @@ import android.view.ViewGroup;
  */
 public class AboutFragment extends Fragment {
 	private static final String TAG = "AboutFragment";
-	
 	public static final int LAYOUT_ID = R.layout.about_fragment; 
+	
+	private WebView mWebView;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		getActivity().setTitle(getString(R.string.app_name) + " > " + getString(R.string.about));
+	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(LAYOUT_ID, container, false);
+		// Load content
+		mWebView = (WebView) view.findViewById(R.id.webview);
+		mWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+		String helpFileName="about_en.html";
+		/*if (Preferences.getInstance().getLanguage().equals("en"))
+		helpFileName="about_us.html";
+		else
+		helpFileName="about_us_vi.html";*/
+		String html = Utils.getFileContent(inflater.getContext(), helpFileName);
+		mWebView.loadDataWithBaseURL(null, html, "text/html", "utf-8", null);
 		return view;
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
 	}
 }

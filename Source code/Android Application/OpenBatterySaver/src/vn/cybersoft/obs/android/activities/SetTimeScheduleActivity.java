@@ -11,7 +11,6 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-
 package vn.cybersoft.obs.android.activities;
 
 import vn.cybersoft.obs.android.R;
@@ -53,7 +52,7 @@ public class SetTimeScheduleActivity extends PreferenceActivity implements TimeP
 	private RepeatPreference mRepeatPref;
 	private ModePreference mModePref;
 
-	private int mId;
+	private long mId;
 	private int mHour;
 	private int mMinutes;
 	//private boolean mTimePickerCancelled;
@@ -64,7 +63,7 @@ public class SetTimeScheduleActivity extends PreferenceActivity implements TimeP
 		super.onCreate(savedInstanceState);
 
 		// Override the default content view.
-		setContentView(R.layout.set_time_schedule_layout);
+		setContentView(R.layout.set_schedule_layout);
 
 		addPreferencesFromResource(R.xml.time_schedule_prefs);
 
@@ -83,7 +82,7 @@ public class SetTimeScheduleActivity extends PreferenceActivity implements TimeP
 		mModePref.setOnPreferenceChangeListener(this); 
 		
         Intent i = getIntent();
-        mId = i.getIntExtra(TimeSchedule.EXTRA_ID, -1);
+        mId = i.getLongExtra(TimeSchedule.EXTRA_ID, -1);
         if (Log.LOGV) {
             Log.v("In SetTimeSchedule, schedule id = " + mId);
         }
@@ -92,9 +91,13 @@ public class SetTimeScheduleActivity extends PreferenceActivity implements TimeP
         if (mId == -1) {
             // No schedule id means create a new schedule.
         	schedule = new TimeSchedule();
+        	setTitle(getString(R.string.app_name) + 
+					" > " + getString(R.string.add_new_time_schedule));
         } else {
             /* load schedule details from database */
         	schedule = TimeSchedule.getTimeSchedule(getContentResolver(), mId);
+        	setTitle(getString(R.string.app_name) + 
+					" > " + getString(R.string.edit_time_schedule));
             // Bad schedule
             if (schedule == null) {
                 finish();
@@ -119,7 +122,7 @@ public class SetTimeScheduleActivity extends PreferenceActivity implements TimeP
 					saveSchedule();
 					finish();
 				} else {
-					createToast(SetTimeScheduleActivity.this, getString(R.string.save_schedule_err));
+					createToast(SetTimeScheduleActivity.this, getString(R.string.save_schedule_mode_empty_err)); 
 				} 
 			}
 		});
@@ -137,6 +140,12 @@ public class SetTimeScheduleActivity extends PreferenceActivity implements TimeP
             showTimePicker();
         }
 		
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		ToastManager.cancelToast();
 	}
 	
     // Used to post runnables asynchronously.

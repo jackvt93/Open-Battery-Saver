@@ -13,21 +13,16 @@
  */
 package vn.cybersoft.obs.android.provider;
 
-import java.io.File;
 
 import vn.cybersoft.obs.android.utilities.Log;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.os.Environment;
 import android.text.TextUtils;
 
 /**
@@ -41,16 +36,24 @@ public class DataProvider extends ContentProvider {
 	
     private static final int TIME_SCHEDULE = 1;
     private static final int TIME_SCHEDULE_ID = 2;
-    private static final int OPTIMAL_MODE = 3;
-    private static final int OPTIMAL_MODE_ID = 4;
+    private static final int POWER_SCHEDULE = 3;
+    private static final int POWER_SCHEDULE_ID = 4;
+    private static final int OPTIMAL_MODE = 5;
+    private static final int OPTIMAL_MODE_ID = 6;
+    private static final int BATTERY_TRACE = 7;
+    private static final int BATTERY_TRACE_ID = 8;
 
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     
     static {
         sUriMatcher.addURI(DataProviderApi.AUTHORITY, "time_schedules", TIME_SCHEDULE);
         sUriMatcher.addURI(DataProviderApi.AUTHORITY, "time_schedules/#", TIME_SCHEDULE_ID);
+        sUriMatcher.addURI(DataProviderApi.AUTHORITY, "power_schedules", POWER_SCHEDULE);
+        sUriMatcher.addURI(DataProviderApi.AUTHORITY, "power_schedules/#", POWER_SCHEDULE_ID);
         sUriMatcher.addURI(DataProviderApi.AUTHORITY, "optimal_modes", OPTIMAL_MODE);
         sUriMatcher.addURI(DataProviderApi.AUTHORITY, "optimal_modes/#", OPTIMAL_MODE_ID);
+        sUriMatcher.addURI(DataProviderApi.AUTHORITY, "battery_traces", BATTERY_TRACE);
+        sUriMatcher.addURI(DataProviderApi.AUTHORITY, "battery_traces/#", BATTERY_TRACE_ID);
     }
 	
 	public DataProvider() {}
@@ -60,7 +63,7 @@ public class DataProvider extends ContentProvider {
 		mOpenHelper = new OBSDatabaseHelper(getContext());
 		return true;
 	}
-
+	
 	@Override
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
@@ -77,6 +80,16 @@ public class DataProvider extends ContentProvider {
 			qb.appendWhere(uri.getLastPathSegment());
 			break;
 			
+		case POWER_SCHEDULE:
+			qb.setTables(OBSDatabaseHelper.POWER_SCHEDULES_TABLE_NAME);
+			break;
+
+		case POWER_SCHEDULE_ID:
+			qb.setTables(OBSDatabaseHelper.POWER_SCHEDULES_TABLE_NAME);
+			qb.appendWhere(DataProviderApi.PowerSchedulesColumns._ID + "=");
+			qb.appendWhere(uri.getLastPathSegment());
+			break;
+			
 		case OPTIMAL_MODE:
 			qb.setTables(OBSDatabaseHelper.OPTIMAL_MODES_TABLE_NAME);
 			break;
@@ -84,6 +97,16 @@ public class DataProvider extends ContentProvider {
 		case OPTIMAL_MODE_ID:
 			qb.setTables(OBSDatabaseHelper.OPTIMAL_MODES_TABLE_NAME);
             qb.appendWhere(DataProviderApi.OptimalModesColumns._ID + "=");
+            qb.appendWhere(uri.getLastPathSegment());
+			break;
+			
+		case BATTERY_TRACE:
+			qb.setTables(OBSDatabaseHelper.BATTERY_TRACES_TABLE_NAME);
+			break;
+			
+		case BATTERY_TRACE_ID:
+			qb.setTables(OBSDatabaseHelper.BATTERY_TRACES_TABLE_NAME);
+            qb.appendWhere(DataProviderApi.BatteryTracesColumns._ID + "=");
             qb.appendWhere(uri.getLastPathSegment());
 			break;
 
@@ -111,12 +134,24 @@ public class DataProvider extends ContentProvider {
 
         case TIME_SCHEDULE_ID:
         	return "vnd.android.cursor.dir/vnd.cybersoft.time_schedules";
+        	
+        case POWER_SCHEDULE:
+            return "vnd.android.cursor.dir/vnd.cybersoft.power_schedules";
+
+        case POWER_SCHEDULE_ID:
+        	return "vnd.android.cursor.dir/vnd.cybersoft.power_schedules";
             
         case OPTIMAL_MODE:
         	return "vnd.android.cursor.dir/vnd.cybersoft.optimal_modes";
         	
         case OPTIMAL_MODE_ID:
         	return "vnd.android.cursor.dir/vnd.cybersoft.optimal_modes";
+        	
+        case BATTERY_TRACE:
+        	return "vnd.android.cursor.dir/vnd.cybersoft.battery_traces";
+        	
+        case BATTERY_TRACE_ID:
+        	return "vnd.android.cursor.dir/vnd.cybersoft.battery_traces";
 
         default:
             throw new IllegalArgumentException("Unknown URI " + uri);
@@ -131,8 +166,14 @@ public class DataProvider extends ContentProvider {
             case TIME_SCHEDULE:
             	rowId = db.insert(OBSDatabaseHelper.TIME_SCHEDULES_TABLE_NAME, null, initialValues);
                 break;
+            case POWER_SCHEDULE:
+            	rowId = db.insert(OBSDatabaseHelper.POWER_SCHEDULES_TABLE_NAME, null, initialValues);
+                break;
             case OPTIMAL_MODE:
                 rowId = db.insert(OBSDatabaseHelper.OPTIMAL_MODES_TABLE_NAME, null, initialValues);
+                break;
+            case BATTERY_TRACE:
+                rowId = db.insert(OBSDatabaseHelper.BATTERY_TRACES_TABLE_NAME, null, initialValues);
                 break;
             default:
                 throw new IllegalArgumentException("Cannot insert from URL: " + uri);
@@ -162,6 +203,19 @@ public class DataProvider extends ContentProvider {
                 }
                 count = db.delete(OBSDatabaseHelper.TIME_SCHEDULES_TABLE_NAME, where, whereArgs);
                 break;
+            case POWER_SCHEDULE:
+                count = db.delete(OBSDatabaseHelper.POWER_SCHEDULES_TABLE_NAME, where, whereArgs);
+                break;
+            case POWER_SCHEDULE_ID:
+                primaryKey = uri.getLastPathSegment();
+                if (TextUtils.isEmpty(where)) {
+                    where = DataProviderApi.PowerSchedulesColumns._ID + "=" + primaryKey;
+                } else {
+                    where = DataProviderApi.PowerSchedulesColumns._ID + "=" + primaryKey +
+                            " AND (" + where + ")";
+                }
+                count = db.delete(OBSDatabaseHelper.POWER_SCHEDULES_TABLE_NAME, where, whereArgs);
+                break;
             case OPTIMAL_MODE:
                 count = db.delete(OBSDatabaseHelper.OPTIMAL_MODES_TABLE_NAME, where, whereArgs);
                 break;
@@ -175,6 +229,19 @@ public class DataProvider extends ContentProvider {
                 }
                 count = db.delete(OBSDatabaseHelper.OPTIMAL_MODES_TABLE_NAME, where, whereArgs);
                 break;
+            case BATTERY_TRACE:
+            	count = db.delete(OBSDatabaseHelper.BATTERY_TRACES_TABLE_NAME, where, whereArgs);
+            	break;
+            case BATTERY_TRACE_ID:
+                primaryKey = uri.getLastPathSegment();
+                if (TextUtils.isEmpty(where)) {
+                    where = DataProviderApi.BatteryTracesColumns._ID + "=" + primaryKey;
+                } else {
+                    where = DataProviderApi.BatteryTracesColumns._ID + "=" + primaryKey +
+                            " AND (" + where + ")";
+                }
+                count = db.delete(OBSDatabaseHelper.BATTERY_TRACES_TABLE_NAME, where, whereArgs);
+            	break;
             default:
                 throw new IllegalArgumentException("Cannot delete from URL: " + uri);
         }
@@ -195,10 +262,22 @@ public class DataProvider extends ContentProvider {
                 		DataProviderApi.TimeSchedulesColumns._ID + "=" + id,
                         null);
                 break;
+            case POWER_SCHEDULE_ID:
+                id = uri.getLastPathSegment();
+                count = db.update(OBSDatabaseHelper.POWER_SCHEDULES_TABLE_NAME, values,
+                		DataProviderApi.PowerSchedulesColumns._ID + "=" + id,
+                        null);
+                break;
             case OPTIMAL_MODE_ID:
                 id = uri.getLastPathSegment();
                 count = db.update(OBSDatabaseHelper.OPTIMAL_MODES_TABLE_NAME, values,
                 		DataProviderApi.OptimalModesColumns._ID + "=" + id,
+                        null);
+                break;
+            case BATTERY_TRACE_ID:
+                id = uri.getLastPathSegment();
+                count = db.update(OBSDatabaseHelper.BATTERY_TRACES_TABLE_NAME, values,
+                		DataProviderApi.BatteryTracesColumns._ID + "=" + id,
                         null);
                 break;
             default: {

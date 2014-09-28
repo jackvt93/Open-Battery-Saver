@@ -40,10 +40,10 @@ import android.text.format.DateFormat;
  *
  */
 public class TimeSchedule implements Parcelable, DataProviderApi.TimeSchedulesColumns {
-    // This action triggers the ScheduleReceiver as well as the TimeScheduleRunner. It
+    // This action triggers the ScheduleReceiver as well as the TimeScheduleExcutorService. It
     // is a public action used in the manifest for receiving TimeSchedule broadcasts
     // from the alarm manager.
-    public static final String SCHEDULE_MODE_ACTION = "vn.cybersoft.obs.android.intent.action.SCHEDULE_MODE"; 
+    public static final String EXECUTE_SCHEDULE_ACTION = "vn.cybersoft.obs.android.intent.action.EXECUTE_TIME_SCHEDULE"; 
     
     // This extra is the raw TimeSchedule object data. It is used in the
     // AlarmManagerService to avoid a ClassNotFoundException when filling in
@@ -100,7 +100,8 @@ public class TimeSchedule implements Parcelable, DataProviderApi.TimeSchedulesCo
         ContentValues values = new ContentValues(COLUMN_COUNT);
         // Set the schedule_time value if this schedule does not repeat. This will be
         // used later to disable expire schedules.
-        long time = 0;
+        @SuppressWarnings("unused")
+		long time = 0;
         if (!schedule.daysOfWeek.isRepeatSet()) {
             time = calculateTimeSchedule(schedule);
         }
@@ -139,7 +140,7 @@ public class TimeSchedule implements Parcelable, DataProviderApi.TimeSchedulesCo
         return calculateTimeSchedule(schedule);
     }
 	
-    public static void deleteTimeSchedule(Context context, int scheduleId) {
+    public static void deleteTimeSchedule(Context context, long scheduleId) {
         if (scheduleId == -1) return;
 
         ContentResolver contentResolver = context.getContentResolver();
@@ -171,7 +172,7 @@ public class TimeSchedule implements Parcelable, DataProviderApi.TimeSchedulesCo
      * Return an TimeSchedule object representing the schedule id in the database.
      * Returns null if no schedule exists.
      */
-    public static TimeSchedule getTimeSchedule(ContentResolver contentResolver, int scheduleId) {
+    public static TimeSchedule getTimeSchedule(ContentResolver contentResolver, long scheduleId) {
         Cursor cursor = contentResolver.query(
         		ContentUris.withAppendedId(CONTENT_URI, scheduleId),
                 QUERY_COLUMNS,
@@ -209,13 +210,13 @@ public class TimeSchedule implements Parcelable, DataProviderApi.TimeSchedulesCo
      */
 
     public static void enableTimeSchedule(
-            final Context context, final int id, boolean enabled) {
+            final Context context, final long id, boolean enabled) {
     	enableTimeScheduleInternal(context, id, enabled);
     	setNextAction(context);
     }
 
     private static void enableTimeScheduleInternal(final Context context,
-            final int id, boolean enabled) {
+            final long id, boolean enabled) {
     	enableTimeScheduleInternal(context, getTimeSchedule(context.getContentResolver(), id),
                 enabled);
     }
@@ -323,7 +324,7 @@ public class TimeSchedule implements Parcelable, DataProviderApi.TimeSchedulesCo
             Log.v("** setSchedule id " + schedule.id + " atTime " + atTimeInMillis);
         }
 
-        Intent intent = new Intent(SCHEDULE_MODE_ACTION);
+        Intent intent = new Intent(EXECUTE_SCHEDULE_ACTION);
 
         // XXX: This is a slight hack to avoid an exception in the remote
         // AlarmManagerService process. The AlarmManager adds extra data to
@@ -338,7 +339,7 @@ public class TimeSchedule implements Parcelable, DataProviderApi.TimeSchedulesCo
         schedule.writeToParcel(out, 0);
         out.setDataPosition(0);
         intent.putExtra(INTENT_RAW_DATA, out.marshall());
-
+        
         PendingIntent sender = PendingIntent.getBroadcast(
                 context, schedule.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -363,7 +364,7 @@ public class TimeSchedule implements Parcelable, DataProviderApi.TimeSchedulesCo
         AlarmManager am = (AlarmManager)
                 context.getSystemService(Context.ALARM_SERVICE);
         PendingIntent sender = PendingIntent.getBroadcast(
-                context, 0, new Intent(SCHEDULE_MODE_ACTION),
+                context, 0, new Intent(EXECUTE_SCHEDULE_ACTION),
                 PendingIntent.FLAG_CANCEL_CURRENT);
         am.cancel(sender);
         saveNextAlarm(context, "");
@@ -448,7 +449,7 @@ public class TimeSchedule implements Parcelable, DataProviderApi.TimeSchedulesCo
 
 	@Override
 	public void writeToParcel(Parcel p, int flags) {
-		p.writeInt(id);
+		p.writeLong(id);
 		p.writeInt(enabled ? 1 : 0);
 		p.writeInt(hour);
 		p.writeInt(minutes);
@@ -457,7 +458,7 @@ public class TimeSchedule implements Parcelable, DataProviderApi.TimeSchedulesCo
 		p.writeLong(modeId);
 	}
 	
-	public int id;
+	public long id;
 	public boolean enabled;
 	public int hour;
 	public int minutes;
@@ -466,17 +467,17 @@ public class TimeSchedule implements Parcelable, DataProviderApi.TimeSchedulesCo
 	public long modeId;
 	
 	public TimeSchedule(Cursor c) {
-		id = c.getInt(ID_INDEX);
+		id = c.getLong(ID_INDEX);
 		enabled = c.getInt(ENABLED_INDEX) >= 1;
 		hour = c.getInt(HOUR_INDEX);
 		minutes = c.getInt(MINUTES_INDEX);
 		daysOfWeek = new DaysOfWeek(c.getInt(DAYS_OF_WEEK_INDEX));
 		time = c.getLong(SCHEDULE_TIME_INDEX);
-		modeId = c.getInt(MODE_ID_INDEX);
+		modeId = c.getLong(MODE_ID_INDEX);
 	}
 	
     public TimeSchedule(Parcel p) {
-        id = p.readInt();
+        id = p.readLong();
         enabled = p.readInt() == 1;
         hour = p.readInt();
         minutes = p.readInt();

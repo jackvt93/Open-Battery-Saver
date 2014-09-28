@@ -15,23 +15,19 @@
 package vn.cybersoft.obs.android.dialog;
 
 import java.lang.ref.WeakReference;
+import java.util.Arrays;
+import java.util.List;
 
 import vn.cybersoft.obs.android.R;
 import vn.cybersoft.obs.android.provider.OptimalMode;
-import vn.cybersoft.obs.android.utilities.Utils;
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.view.WindowCompat;
 import android.text.TextUtils;
-import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -186,18 +182,14 @@ public class SwitchModeConfirmDialog extends Dialog implements DialogInterface {
 		mOptimalMode = mode;
 		
 		if (mOptimalMode != null) {
-			mScreenBrightnessText.setText(getContext().getString(R.string.percent_value, mode.screenBrightness * 100 / 255)); 
-			
-			mScreenTimeoutText.setText(getContext().getString(R.string.seconds, mode.screenTimeout));
-			
+			//mScreenBrightnessText.setText(getContext().getString(R.string.percent_value, mode.screenBrightness * 100 / 255)); 
+			mScreenBrightnessText.setText(getBrightnessPercentage(mode.screenBrightness)); 
+			//mScreenTimeoutText.setText(getContext().getString(R.string.seconds, mode.screenTimeout));
+			mScreenTimeoutText.setText(getReadableScreenTimeout(mode.screenTimeout));
 			mVibrateText.setText(mode.vibrate ? getContext().getString(R.string.on) : getContext().getString(R.string.off));
-			
 			mWifiText.setText(mode.wifi ? getContext().getString(R.string.on) : getContext().getString(R.string.off));
-			
 			mBluetoothText.setText(mode.bluetooth ? getContext().getString(R.string.on) : getContext().getString(R.string.off));
-			
 			mSyncText.setText(mode.sync ? getContext().getString(R.string.on) : getContext().getString(R.string.off));
-			
 			mHapticFeedbackText.setText(mode.hapticFeedback ? getContext().getString(R.string.on) : getContext().getString(R.string.off)); 
 		}
 	}
@@ -267,6 +259,23 @@ public class SwitchModeConfirmDialog extends Dialog implements DialogInterface {
             buttonPanel.setVisibility(View.GONE);
         }
     }
+    
+    private String getBrightnessPercentage(int value) {
+    	int round =   Math.round((float)value * 100 / 255);
+    	float unRound = Math.round((float)round / 10);
+    	int ret = (int) (unRound * 10);
+    	return getContext().getString(R.string.percentage, ret == 0 ? 10 : ret);
+    }
+    
+private String getReadableScreenTimeout(int millis) {
+	String[] texts = getContext().getResources().getStringArray(R.array.screen_timeout_entries);
+	String[] values = getContext().getResources().getStringArray(R.array.screen_timeout_values);
+	
+	List<String> vals = Arrays.asList(values);
+	int idx = vals.indexOf(Integer.toString(millis));
+	return idx != -1 ? texts[idx] : "None"; 
+}
+    
     
 	private boolean setupTitle(LinearLayout topPanel) {
 		boolean hasTitle = true;

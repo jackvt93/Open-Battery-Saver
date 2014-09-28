@@ -32,6 +32,8 @@ public class OBSDatabaseHelper extends SQLiteOpenHelper {
      **/
 	private static final int VERSION_1 = 1;
 	
+	private static final int VERSION_2 = 2;
+	
     // This creates a default original mode name "short"
     private static final String DEFAULT_MODE_1 = "('mode_name_short', 'mode_desc_short', 0, 255, 600000, 1, 1, 1, 1, 1);";
 
@@ -41,7 +43,9 @@ public class OBSDatabaseHelper extends SQLiteOpenHelper {
     // Database and table names
     static final String DATABASE_NAME = "obs.db";
     static final String TIME_SCHEDULES_TABLE_NAME = "time_schedules";
+    static final String POWER_SCHEDULES_TABLE_NAME = "power_schedules";
     static final String OPTIMAL_MODES_TABLE_NAME = "optimal_modes";
+    static final String BATTERY_TRACES_TABLE_NAME = "battery_traces";
     
     private static void createTimeSchedulesTable(SQLiteDatabase db) {
 		db.execSQL("CREATE TABLE " + TIME_SCHEDULES_TABLE_NAME + " (" +
@@ -54,7 +58,18 @@ public class OBSDatabaseHelper extends SQLiteOpenHelper {
 				DataProviderApi.TimeSchedulesColumns.MODE_ID + " INTEGER REFERENCES " +
 					OPTIMAL_MODES_TABLE_NAME + "(" + DataProviderApi.OptimalModesColumns._ID + ") " +
 					"ON UPDATE CASCADE ON DELETE CASCADE" + ");");
-		Log.i("Schedules table created");
+		Log.i("Time schedules table created");
+    }
+    
+    private static void createPowerSchedulesTable(SQLiteDatabase db) {
+		db.execSQL("CREATE TABLE " + POWER_SCHEDULES_TABLE_NAME + " (" +
+				DataProviderApi.PowerSchedulesColumns._ID + " INTEGER PRIMARY KEY, " +
+				DataProviderApi.PowerSchedulesColumns.BATTERY_LEVEL + " INTEGER NOT NULL, " +
+				DataProviderApi.PowerSchedulesColumns.ENABLED + " INTEGER NOT NULL, " +
+				DataProviderApi.PowerSchedulesColumns.MODE_ID + " INTEGER REFERENCES " +
+					OPTIMAL_MODES_TABLE_NAME + "(" + DataProviderApi.OptimalModesColumns._ID + ") " +
+					"ON UPDATE CASCADE ON DELETE CASCADE" + ");");
+		Log.i("Power schedules table created");
     }
     
     private static void createOptimalModesTable(SQLiteDatabase db) {
@@ -73,6 +88,16 @@ public class OBSDatabaseHelper extends SQLiteOpenHelper {
     	Log.i("Modes table created");
     }
     
+    private static void createBatteryTracesTable(SQLiteDatabase db) {
+    	db.execSQL("CREATE TABLE " + BATTERY_TRACES_TABLE_NAME + " (" +
+    			DataProviderApi.BatteryTracesColumns._ID + " INTEGER PRIMARY KEY, " +
+    			DataProviderApi.BatteryTracesColumns.HOUR + " INTEGER NOT NULL, " +
+				DataProviderApi.BatteryTracesColumns.MINUTES + " INTEGER NOT NULL, " +
+				DataProviderApi.BatteryTracesColumns.LEVEL + " INTEGER NOT NULL, " +
+    			DataProviderApi.BatteryTracesColumns.DATE + " INTEGER NOT NULL" + ");");
+    	Log.i("battery traces table created");
+    }
+    
     private Context mContext;
     
 	public OBSDatabaseHelper(Context context) {
@@ -82,8 +107,10 @@ public class OBSDatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		createTimeSchedulesTable(db);
 		createOptimalModesTable(db);
+		createTimeSchedulesTable(db);
+		createPowerSchedulesTable(db);
+		createBatteryTracesTable(db);
 		
         // insert default modes
         Log.i("Inserting default optimal modes");

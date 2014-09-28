@@ -13,17 +13,24 @@
  */
 package vn.cybersoft.obs.android.application;
 
-import vn.cybersoft.obs.android.database.ModeDbAdapter;
-import vn.cybersoft.obs.android.fragments.SmartTabFragment;
-import vn.cybersoft.obs.android.receivers.ScreenStateReceiver;
-import vn.cybersoft.obs.android.services.BatteryStatusService;
+import java.util.Calendar;
+
+import vn.cybersoft.obs.andriod.batterystats2.service.ICounterService;
+import vn.cybersoft.obs.andriod.batterystats2.service.UMLoggerService;
+import vn.cybersoft.obs.android.services.NotificationService;
+import vn.cybersoft.obs.android.utilities.Log;
 import vn.cybersoft.obs.android.utilities.Utils;
+import android.app.AlarmManager;
 import android.app.Application;
-import android.content.BroadcastReceiver;
+import android.app.PendingIntent;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import android.content.ServiceConnection;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.IBinder;
 
 /**
  * @author Luan Vu
@@ -31,41 +38,86 @@ import android.preference.PreferenceManager;
  */
 public class OBS extends Application {
 	private static OBS singleton = null;
-	
-	private ModeDbAdapter mModeDbAdapter;
-	
-	private SharedPreferences mPreferences;
-	
+
+	private ICounterService mCounterService;
+
 	public static OBS getInstance() {
 		return singleton;
 	}
-	
-	public SharedPreferences getSharePreferences() {
-		return mPreferences;
-	}
-	
+
 	public static long getSelectedOptimalModeId() {
 		return (Long) Utils.getValueFromPreference(OBS.getInstance(), Long.class, "optimal_mode", Long.valueOf(-1)); 
 	}
-	
+
 	public static void saveOptimalModeId(long id) {
 		Utils.saveToPreference(OBS.getInstance(), "optimal_mode", id);
 	}
 	
+	public ICounterService getCounterService() {
+		return mCounterService;
+	}
+
+	public static boolean isFirstRun() {
+		// get the package info object with version number
+		PackageInfo packageInfo = null;
+		try {
+			packageInfo =
+					getInstance().getApplicationContext().getPackageManager().getPackageInfo(getInstance().getApplicationContext().getPackageName(), PackageManager.GET_META_DATA);
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		boolean firstRun = (Boolean)  Utils.getValueFromPreference(getInstance(), Boolean.class, "firstRun", true);
+
+		// if you've increased version code, then update the version number and set firstRun to true
+		if ((Integer) Utils.getValueFromPreference(getInstance(), Integer.class, "lastVersion", 0) < packageInfo.versionCode) {
+			Utils.saveToPreference(getInstance(), "lastVersion", Integer.valueOf(packageInfo.versionCode));
+			firstRun = true;
+		}
+
+		return firstRun;
+	}
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		singleton = this;
-		mModeDbAdapter = new ModeDbAdapter(getApplicationContext());
-		mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-		
-/*		// start application forground service
-		Intent i = new Intent(this, BatteryStatusService.class);
-		startService(i);*/
-	}
+		startNotificationService();
+		startPowerMonitorService();
 
-	public ModeDbAdapter getModeDbAdapter() {
-		return mModeDbAdapter;
+		if (isFirstRun()) {
+			
+		}
 	}
 	
+	public void startPowerMonitorService() {
+		Intent i = new Intent(this, UMLoggerService.class);
+		CounterServiceConnection serviceConnection = new CounterServiceConnection();
+		bindService(i, serviceConnection, 0);
+		if (mCounterService == null) {
+			if (Log.LOGV) {
+				Log.v("******* start UMLoggerService"); 
+			}
+			startService(i);
+		}
+	}
+	
+	private void startNotificationService() {
+		Intent i = new Intent(this, NotificationService.class);
+		startService(i);
+	}
+
+	private class CounterServiceConnection implements ServiceConnection {
+
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			mCounterService = ICounterService.Stub.asInterface(service);
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+			// TODO Auto-generated method stub
+		}
+	}
+
 }

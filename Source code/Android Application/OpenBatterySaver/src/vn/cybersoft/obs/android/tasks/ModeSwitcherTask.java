@@ -14,13 +14,10 @@
 package vn.cybersoft.obs.android.tasks;
 
 import vn.cybersoft.obs.android.application.OBS;
-import vn.cybersoft.obs.android.database.ModeDbAdapter;
 import vn.cybersoft.obs.android.listeners.ModeSwitcherListener;
 import vn.cybersoft.obs.android.provider.OptimalMode;
 import vn.cybersoft.obs.android.utilities.DeviceUtils;
 import vn.cybersoft.obs.android.utilities.Log;
-import vn.cybersoft.obs.android.utilities.Utils;
-import android.database.Cursor;
 import android.os.AsyncTask;
 
 /**
@@ -41,34 +38,28 @@ public class ModeSwitcherTask extends AsyncTask<Long, Void, String> {
 	@Override
 	protected String doInBackground(Long... params) {
 		long modeId = params[0];
-		Cursor c = null; 
 		
-		try {
-			c = OBS.getInstance().getModeDbAdapter().query(ModeDbAdapter._ID + " = " + modeId, null);
-			
-			if (c.getCount() > 1) {
-				Log.e(t + ".doInBackground(): " + "Bad query in mode table");  
-			}
-			
-			c.moveToFirst();
-			
-			DeviceUtils.switchToOptimalMode(new OptimalMode(c)); 
-			OBS.saveOptimalModeId(modeId); 
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			c.close();
+		OptimalMode mode = OptimalMode.getMode(OBS.getInstance().getContentResolver(), modeId);
+		
+		if (null == mode) {
+			Log.e(t + ".doInBackground(): " + "Bad query in mode table"); 
+			return "Error: Can't found this optimal mode.";
 		}
+		DeviceUtils.switchToOptimalMode(mode); 
+		OBS.saveOptimalModeId(modeId); 
 		return "";
 	}
 	
 	@Override
-	protected void onPostExecute(String result) {
-		super.onPostExecute(result);
+	protected void onPostExecute(String error) {
+		super.onPostExecute(error);
 		
 		if(null != listener) {
-			listener.switchComplete();
+			if (error != "") {
+				listener.switchError(error);
+			} else {
+				listener.switchComplete();
+			}
 		}
 	}
 

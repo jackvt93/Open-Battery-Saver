@@ -14,7 +14,7 @@
 	 limitations under the License. 
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/add_new_schedule_mode_time" >
+    android:title="@string/add_new_schedule" >
 
     <CheckBoxPreference
         android:key="time_schedule_enabled"
@@ -34,6 +34,6 @@
     <vn.cybersoft.obs.android.preference.ModePreference
         android:key="time_schedule_mode"
         android:persistent="false"
-        android:title="@string/time_schedule_mode" />
+        android:title="@string/schedule_mode" />
 
 </PreferenceScreen>

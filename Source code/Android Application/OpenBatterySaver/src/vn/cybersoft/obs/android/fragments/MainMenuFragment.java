@@ -13,7 +13,6 @@
  */
 package vn.cybersoft.obs.android.fragments;
 
-import com.jeremyfeinstein.slidingmenu.lib.app.SlidingActivity;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import vn.cybersoft.obs.android.R;
@@ -42,9 +41,9 @@ public class MainMenuFragment extends Fragment implements OnItemClickListener {
 
 	public static final int MENU_BATTERY_INFO = 0x001;
 	public static final int MENU_OPTIMIZATION = 0x002;
-	public static final int MENU_CHARGE = 0x003;
-	public static final int MENU_CONSUMPTION = 0x004;
-	public static final int MENU_ABOUT = 0x005;
+/*	public static final int MENU_CHARGE = 0x003;*/
+	public static final int MENU_CONSUMPTION = 0x003;
+	public static final int MENU_ABOUT = 0x004;
 
 	private ListView mMenu;
 	private ListView mSecondMenu;
@@ -58,14 +57,15 @@ public class MainMenuFragment extends Fragment implements OnItemClickListener {
 				R.layout.main_menu_list_row);
 		adapter.add(new MainMenuListRow(MENU_BATTERY_INFO,
 				R.drawable.ic_action_battery,
-				getString(R.string.menu_battery_info)));
+				getString(R.string.battery_info)));
 		adapter.add(new MainMenuListRow(MENU_OPTIMIZATION,
-				R.drawable.ic_action_flash_on,
-				getString(R.string.menu_caption_optimization)));
-		adapter.add(new MainMenuListRow(MENU_CHARGE, R.drawable.ic_action_battery,
-				getString(R.string.menu_caption_charge)));
-		adapter.add(new MainMenuListRow(MENU_CONSUMPTION, R.drawable.ic_action_battery,
-				getString(R.string.menu_caption_consumption)));
+				R.drawable.ic_optimization,
+				getString(R.string.optimization)));
+/*		adapter.add(new MainMenuListRow(MENU_CHARGE, R.drawable.ic_action_battery,
+				getString(R.string.menu_caption_charge)));*/
+		adapter.add(new MainMenuListRow(MENU_CONSUMPTION, R.drawable.ic_action_consumption,
+				getString(R.string.consumption)));
+		adapter.add(new MainMenuListRow(MENU_ABOUT, R.drawable.ic_action_about, getString(R.string.about))); 
 		
 		mMenu = (ListView) view.findViewById(R.id.menuList);
 		mMenu.setAdapter(adapter);
@@ -92,9 +92,9 @@ public class MainMenuFragment extends Fragment implements OnItemClickListener {
 				((MainActivity)activity).swapToFragmentView(ScreenList.OPTIMIZATION);
 				break;
 
-			case MENU_CHARGE:
+/*			case MENU_CHARGE:
 				((MainActivity)activity).swapToFragmentView(ScreenList.CHARGE);
-				break;
+				break;*/
 
 			case MENU_CONSUMPTION:
 				((MainActivity)activity).swapToFragmentView(ScreenList.CONSUMPTION);

@@ -21,23 +21,11 @@ import vn.cybersoft.obs.android.fragments.ChargeFragment;
 import vn.cybersoft.obs.android.fragments.ConsumptionFragment;
 import vn.cybersoft.obs.android.fragments.MainMenuFragment;
 import vn.cybersoft.obs.android.fragments.OptimizationFragment;
-import vn.cybersoft.obs.android.listeners.Callback;
-import vn.cybersoft.obs.android.models.BatteryInfo;
-import vn.cybersoft.obs.android.receivers.TimeScheduleReceiver;
-import vn.cybersoft.obs.android.services.BatteryStatusService;
-import vn.cybersoft.obs.android.utilities.Utils;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
-import android.app.AlertDialog;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentManager.BackStackEntry;
@@ -79,7 +67,7 @@ public class MainActivity extends BaseActivity {
 		getSupportFragmentManager().beginTransaction()
 								   .replace(R.id.behind_content, new MainMenuFragment())
 								   .commit();
-								   
+		
 		setContentView(R.layout.main_layout); 
 		
 		// customize the SlidingMenu
@@ -161,7 +149,8 @@ public class MainActivity extends BaseActivity {
 		
 		if(null != entry) {
 			// flush backward, including the screen want to go back to
-			fragmentManager.popBackStackImmediate(currentFragment.name(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			//fragmentManager.popBackStackImmediate(currentFragment.name(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			fragmentManager.popBackStack(currentFragment.name(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 		
 		// add transaction to show the screen we want

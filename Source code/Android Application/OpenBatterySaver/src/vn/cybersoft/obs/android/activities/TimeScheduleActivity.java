@@ -16,9 +16,9 @@ import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
 import vn.cybersoft.obs.android.R;
-import vn.cybersoft.obs.android.application.OBS;
+import vn.cybersoft.obs.android.provider.OptimalMode;
 import vn.cybersoft.obs.android.provider.TimeSchedule;
-import vn.cybersoft.obs.android.utilities.ToastManager;
+import vn.cybersoft.obs.android.utilities.Utils;
 import android.os.Bundle;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -47,6 +47,7 @@ import android.widget.AdapterView.OnItemClickListener;
  * @author Luan Vu (hlcu.cybersoft@gmail.com)
  *
  */
+// extends FragmentActivity to use with cursorloader in android device above api 11
 public class TimeScheduleActivity extends FragmentActivity 
 			implements OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
 	
@@ -63,22 +64,26 @@ public class TimeScheduleActivity extends FragmentActivity
     private LayoutInflater mInflater;
     private ListView mScheduleList;
     private ScheduleAdapter mSchedules;
-    private Cursor mCursor;
+    //private Cursor mCursor;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mInflater = LayoutInflater.from(this);
         //mPrefs = getSharedPreferences(PREFERENCES, 0);
-        mCursor = TimeSchedule.getTimeSchedulesCursor(getContentResolver());
-
+        //mCursor = TimeSchedule.getTimeSchedulesCursor(getContentResolver());
         updateLayout();
 	}
 	
     private void updateLayout() {
         setContentView(LAYOUT_ID);
+        
+		setTitle(getString(R.string.app_name) + 
+				" > " + getString(R.string.schedule_by_time));
+		
         mScheduleList = (ListView) findViewById(android.R.id.list);
-        mSchedules = new ScheduleAdapter(this, R.layout.schedule_list_row, mCursor);
+        //mSchedules = new ScheduleAdapter(this, R.layout.schedule_list_row, mCursor);
+        mSchedules = new ScheduleAdapter(this, R.layout.time_schedule_list_row);
         mScheduleList.setAdapter(mSchedules);
         mScheduleList.setVerticalScrollBarEnabled(true);
         mScheduleList.setOnItemClickListener(this);
@@ -86,7 +91,7 @@ public class TimeScheduleActivity extends FragmentActivity
         
         getSupportLoaderManager().initLoader(TIME_SCHEDULE_LIST_LOADER, null, this);
 
-        View addSchedule = findViewById(R.id.add_time_schedule);
+        View addSchedule = findViewById(R.id.add_schedule);
         addSchedule.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     addNewSchedule();
@@ -129,7 +134,7 @@ public class TimeScheduleActivity extends FragmentActivity
         textView.setText(time);
         textView = (TextView) v.findViewById(R.id.header_mode);
         
-        textView.setText(OBS.getInstance().getModeDbAdapter().getModeNameStr(schedule.modeId)); 
+        textView.setText(Utils.getString(this, OptimalMode.getMode(getContentResolver(), schedule.modeId).name, R.string.class));  
 
         // Set the custom view on the menu.
         menu.setHeaderView(v);
@@ -143,7 +148,7 @@ public class TimeScheduleActivity extends FragmentActivity
     public boolean onContextItemSelected(MenuItem item) {
         final AdapterContextMenuInfo info =
                 (AdapterContextMenuInfo) item.getMenuInfo();
-        final int id = (int) info.id;
+        final long id = info.id;
         // Error check just in case.
         if (id == -1) {
             return super.onContextItemSelected(item);
@@ -169,6 +174,7 @@ public class TimeScheduleActivity extends FragmentActivity
                 final TimeSchedule schedule = new TimeSchedule(c);
                 TimeSchedule.enableTimeSchedule(this, schedule.id, !schedule.enabled);
                 if (!schedule.enabled) {
+                	//TODO
                 }
                 return true;
 
@@ -187,15 +193,12 @@ public class TimeScheduleActivity extends FragmentActivity
     @Override
     protected void onDestroy() {
     	super.onDestroy();
-    	ToastManager.cancelToast();
-    	mCursor.close();
     }
 
 	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(this, SetTimeScheduleActivity.class);
-        intent.putExtra(TimeSchedule.EXTRA_ID, (int) id);
+        intent.putExtra(TimeSchedule.EXTRA_ID, id);
         startActivity(intent);
 	}
 	
@@ -228,6 +231,10 @@ public class TimeScheduleActivity extends FragmentActivity
 		public ScheduleAdapter(Context context, int layout, Cursor c) {
 			super(context, layout, c, 0);
 		}
+		
+		public ScheduleAdapter(Context context, int layout) {
+			super(context, layout, null, 0);
+		}
 
 		@Override
 		public void bindView(View view, Context context, Cursor cursor) {
@@ -259,19 +266,18 @@ public class TimeScheduleActivity extends FragmentActivity
             timeDisplay.setTypeface(Typeface.DEFAULT);
             
 			TextView modeToChange = (TextView) view.findViewById(R.id.text2);
-			final String modeNameStr = OBS.getInstance().getModeDbAdapter().getModeNameStr(schedule.modeId);
+			final String modeNameStr = Utils.getString(mContext, OptimalMode.getMode(getContentResolver(), schedule.modeId).name, R.string.class);
 			modeToChange.setText(getString(R.string.mode_to_change, modeNameStr)); 
 			
             TextView daysOfWeekView = (TextView) view.findViewById(R.id.text3);
             final String daysOfWeekStr = schedule.daysOfWeek.toString(TimeScheduleActivity.this, false);
             if (daysOfWeekStr != null && daysOfWeekStr.length() != 0) {
-                daysOfWeekView.setText(daysOfWeekStr);
+                daysOfWeekView.setText("(" + daysOfWeekStr + ")");
                 daysOfWeekView.setVisibility(View.VISIBLE);
             } else {
                 daysOfWeekView.setVisibility(View.GONE);
             }
 		}
-    	
     }
 
 }

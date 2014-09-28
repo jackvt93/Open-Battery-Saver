@@ -14,6 +14,7 @@
 
 package vn.cybersoft.obs.android.models;
 
+import android.content.Intent;
 import android.os.BatteryManager;
 
 /**
@@ -22,7 +23,6 @@ import android.os.BatteryManager;
  *
  */
 public class BatteryInfo {
-	
 	public int status;
 	public int heath;
 	public boolean present;
@@ -57,6 +57,10 @@ public class BatteryInfo {
 		this.technology = technology;
 		this.invalidCharger = invalidCharger;
 	}
+	
+    public int getBatteryPercentage() {
+        return level * 100 / scale;
+    }
 	
 	
 }

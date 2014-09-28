@@ -14,12 +14,12 @@
 package vn.cybersoft.obs.android.preference;
 
 
+import java.util.List;
+
 import vn.cybersoft.obs.android.R;
-import vn.cybersoft.obs.android.application.OBS;
-import vn.cybersoft.obs.android.database.ModeDbAdapter;
-import vn.cybersoft.obs.android.utilities.ReflectionUtils;
+import vn.cybersoft.obs.android.provider.OptimalMode;
+import vn.cybersoft.obs.android.utilities.Utils;
 import android.content.Context;
-import android.database.Cursor;
 import android.preference.ListPreference;
 import android.util.AttributeSet;
 
@@ -33,11 +33,23 @@ public class ModePreference extends ListPreference {
     public ModePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         
-        Cursor c = null;
         String[] entries = null; 
         String[] entryValues = null;
         
-        try {
+        List<OptimalMode> modes = OptimalMode.getModes(context.getContentResolver(), null);
+        
+        int size = modes.size();
+        
+		entries = new String[size];
+		entryValues = new String[size];
+		
+		for (int i = 0; i < size; i++) {
+			OptimalMode optimalMode = modes.get(i);
+			entries[i] = Utils.getString(getContext(), optimalMode.name, R.string.class);
+			entryValues[i] = String.valueOf(optimalMode.id);
+		}
+        
+/*        try {
 			c = OBS.getInstance().getModeDbAdapter().fetchAllMode();
 			c.moveToFirst();
 			int count = c.getCount();
@@ -59,7 +71,7 @@ public class ModePreference extends ListPreference {
 			if (c != null) {
 				c.close();
 			}
-		}
+		}*/
         
         setEntries(entries);
         setEntryValues(entryValues);

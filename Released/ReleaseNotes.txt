@@ -1,4 +1,17 @@
 OBS v1.0.1
+- rev 13
+	* Enhancements battery info screen ui.
+	* Fix some bugs of time schedule.
+- rev 12
+	* Add feature of smart optimize - Network usage control (automatically turn of network when screen of)
+	* Add chart view to battery info screen. Chart view get battery trace data and show battery level of battery by time in dates. 
+		This chart help user control using battery themselves  
+- rev 11
+	* Complete fully feature optimization by mode
+	* fix somes bug of smart optimization
+- rev 10
+	* Complete smart optimazation schedule by time.
+	* fix some bugs of optimazation by mode(manual)
 - rev 1
 	* Add little feature "optimization by mode" (user can't create new optimal mode)
 	* Present optimal modes switch wifi, bluetooth, brightness, screen off time out, sync, haptic feedback, vibrate.
