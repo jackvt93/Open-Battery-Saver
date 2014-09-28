@@ -1,5 +1,0 @@
-OBS v1.0.1
-- rev 1
-	* Add little feature "optimization by mode" (user can't create new optimal mode)
-	* Present optimal modes switch wifi, bluetooth, brightness, screen off time out, sync, haptic feedback, vibrate.
-	* Create base user interface
