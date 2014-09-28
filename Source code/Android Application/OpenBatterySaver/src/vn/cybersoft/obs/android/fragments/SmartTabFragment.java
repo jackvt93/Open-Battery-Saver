@@ -25,7 +25,8 @@ import android.support.v4.preference.PreferenceFragment;
  */
 public class SmartTabFragment extends PreferenceFragment {
 	public static final String KEY_SMART_OPTIMAZATION_ENABLE = "smart_optimization_enable";
-	public static final String KEY_AUTO_CLEAR_APP_SCREEN_LOCK = "auto_clear_apps_screen_lock";
+	public static final String KEY_CLEAR_APP_SCREEN_LOCK = "clear_apps_screen_lock";
+	public static final String KEY_NETWORK_CONTROL = "network_control";
 	
 	private SwitchPreference mSmartOptimizationEnablePreference;
 	private CheckBoxPreference mAutoClearAppPreference;
@@ -33,12 +34,9 @@ public class SmartTabFragment extends PreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.smart_optimization_prefs);
-        
-        mAutoClearAppPreference = (CheckBoxPreference) findPreference(KEY_AUTO_CLEAR_APP_SCREEN_LOCK);
-        
+        mAutoClearAppPreference = (CheckBoxPreference) findPreference(KEY_CLEAR_APP_SCREEN_LOCK);
     }
 
 	

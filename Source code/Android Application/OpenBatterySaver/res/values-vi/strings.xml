@@ -15,14 +15,13 @@
 -->
 <resources>
 
-    <string name="app_name">Open Battery Saver</string>
     <string name="action_settings">Settings</string>
-    <string name="menu_battery_info">Thông tin pin</string>
-    <string name="menu_caption_optimization">Tối ưu</string>
-    <string name="menu_caption_charge">Sạc pin</string>
-    <string name="menu_caption_consumption">Tiêu dùng</string>
-    <string name="menu_second_caption_help">Trợ giúp</string>
-    <string name="menu_second_caption_about">Thông tin</string>
+    <string name="battery_info">Thông tin pin</string>
+    <string name="optimization">Tối ưu</string>
+    <string name="charge">Sạc pin</string>
+    <string name="consumption">Tiêu dùng</string>
+    <string name="help">Trợ giúp</string>
+    <string name="about">Thông tin</string>
     <string name="mode_desc_short">User this mode if you want device always high performance</string>
     <string name="mode_desc_long">This mode should used if you want save battery</string>
     <string name="mode_desc_middle">This mode is middle</string>

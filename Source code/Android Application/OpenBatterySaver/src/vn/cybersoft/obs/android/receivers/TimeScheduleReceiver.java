@@ -72,7 +72,7 @@ public class TimeScheduleReceiver extends BroadcastReceiver {
         }
 
         // Run the schedule action
-        Intent i = new Intent(TimeSchedule.SCHEDULE_MODE_ACTION);
+        Intent i = new Intent(TimeSchedule.EXECUTE_SCHEDULE_ACTION);
         i.putExtra(TimeSchedule.INTENT_EXTRA, schedule);
         context.startService(i);
 	}

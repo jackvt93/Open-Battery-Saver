@@ -16,7 +16,6 @@ package vn.cybersoft.obs.android.activities;
 import vn.cybersoft.obs.android.R;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -25,9 +24,6 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 
 public class BaseActivity extends SlidingFragmentActivity {
-	
-	private static final int MENU_SELECTOR = Menu.FIRST;
-	
 	private int mTitleRes;
 	protected ListFragment mFrag;
 
@@ -49,12 +45,13 @@ public class BaseActivity extends SlidingFragmentActivity {
 		sm.setShadowWidthRes(R.dimen.shadow_width);
 		sm.setShadowDrawable(R.drawable.shadow);
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+		sm.setBehindWidth(500);
 		sm.setFadeDegree(0.35f);
 		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_USE_LOGO);
+		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_HOME);
 		actionBar.show();
 
 	}
@@ -69,10 +66,4 @@ public class BaseActivity extends SlidingFragmentActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		int showOption = MenuItem.SHOW_AS_ACTION_IF_ROOM;
-		//MenuItem item = menu.add(Menu.NONE, MENU_SELECTOR, );
-		return true;
-	}
 }

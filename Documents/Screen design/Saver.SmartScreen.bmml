@@ -1,0 +1,329 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="853" measuredH="831" mockupW="412" mockupH="751">
+  <controls>
+    <control controlID="0" controlTypeID="__group__" x="441" y="80" w="412" h="751" measuredW="412" measuredH="751" zOrder="0" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="__group__" x="0" y="0" w="412" h="751" measuredW="412" measuredH="751" zOrder="0" locked="false" isInGroup="0">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="__group__" x="0" y="0" w="412" h="751" measuredW="412" measuredH="751" zOrder="0" locked="false" isInGroup="0">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Component" x="0" y="0" w="412" h="751" measuredW="412" measuredH="751" zOrder="0" locked="false" isInGroup="0">
+                  <controlProperties>
+                    <override controlID="0" x="0" y="0" w="412" h="751"/>
+                    <override controlID="1" x="10" y="53" w="386" h="653">
+                      <text/>
+                    </override>
+                    <override controlID="2" x="152" y="22" w="101" h="12"/>
+                    <override controlID="3" x="343" y="21" w="16" h="15"/>
+                    <override controlID="4" x="260" y="26" w="10" h="9"/>
+                    <override controlID="5" x="271" y="26" w="10" h="9"/>
+                    <override controlID="6" x="12" y="56" w="380" h="38"/>
+                    <override controlID="7" x="12" y="663" w="380" h="40"/>
+                    <override controlID="8" x="194" y="720" w="10" h="9"/>
+                    <override controlID="-1"/>
+                    <override controlID="6:10:0" x="0" y="1" w="32" h="32"/>
+                    <override controlID="6:10:2" x="42" y="1" w="32" h="32"/>
+                    <override controlID="7:4" x="36" y="3" w="105" h="36"/>
+                    <override controlID="7:3" x="233" y="3" w="105" h="36"/>
+                    <override controlID="6:10:3" x="59" y="0" w="35" h="32"/>
+                    <override controlID="7:2" x="134" y="3" w="105" h="36"/>
+                    <override controlID="6:0" x="0" y="0" w="380" h="26"/>
+                    <override controlID="6:10:1" x="21" y="1" w="32" h="32"/>
+                    <override controlID="7:0" x="0" y="0" w="380" h="40"/>
+                    <override controlID="6:10" x="281" y="5" w="94" h="33"/>
+                    <src>./assets/Samsung%2520Galaxy%2520Nexus.bmml%23gNex720Portrait</src>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+            <control controlID="1" controlTypeID="__group__" x="14" y="623" w="378" h="41" measuredW="378" measuredH="41" zOrder="1" locked="false" isInGroup="0">
+              <controlProperties>
+                <controlName>ga-tabs</controlName>
+              </controlProperties>
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="378" h="41" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <borderStyle>none</borderStyle>
+                    <color>14540253</color>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::RoundButton" x="0" y="0" w="93" h="41" measuredW="32" measuredH="32" zOrder="1" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <backgroundAlpha>0</backgroundAlpha>
+                    <borderColor>14540253</borderColor>
+                    <color>10470904</color>
+                    <href>BatteryInfoScreen%26bm%3BBatteryInfoScreen.bmml%26bm%3BBatteryInfoScreen.bmml%26bm%3BBatteryInfoScreen.bmml</href>
+                    <icon>BatteryIcon%7Csmall</icon>
+                    <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2214%2C623%2C107%2C664%22%20href%3D%22BatteryInfoScreen.bmml%22%20alt%3D%22BatteryInfoScreen%22%20id%3D%221%22/%3E</map>
+                    <shape>rectangle</shape>
+                    <size>13</size>
+                    <text>Battery</text>
+                  </controlProperties>
+                </control>
+                <control controlID="2" controlTypeID="com.balsamiq.mockups::RoundButton" x="91" y="0" w="96" h="41" measuredW="32" measuredH="32" zOrder="2" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <backgroundAlpha>1</backgroundAlpha>
+                    <borderColor>14540253</borderColor>
+                    <color>10470904</color>
+                    <icon>LightningIcon%7Csmall</icon>
+                    <shape>rectangle</shape>
+                    <size>13</size>
+                    <text>Optimization</text>
+                  </controlProperties>
+                </control>
+                <control controlID="3" controlTypeID="com.balsamiq.mockups::RoundButton" x="285" y="0" w="93" h="41" measuredW="32" measuredH="32" zOrder="3" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <backgroundAlpha>0</backgroundAlpha>
+                    <borderColor>14540253</borderColor>
+                    <color>10470904</color>
+                    <href>ConsumptionScreen%26bm%3BConsumptionScreen.bmml%26bm%3BConsumptionScreen.bmml%26bm%3BConsumptionScreen.bmml</href>
+                    <icon>ChartColumnIcon%7Csmall</icon>
+                    <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22299%2C623%2C392%2C664%22%20href%3D%22ConsumptionScreen.bmml%22%20alt%3D%22ConsumptionScreen%22%20id%3D%223%22/%3E</map>
+                    <shape>rectangle</shape>
+                    <size>13</size>
+                    <text>Consumption</text>
+                  </controlProperties>
+                </control>
+                <control controlID="4" controlTypeID="com.balsamiq.mockups::RoundButton" x="188" y="0" w="96" h="41" measuredW="32" measuredH="32" zOrder="4" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <backgroundAlpha>0</backgroundAlpha>
+                    <borderColor>14540253</borderColor>
+                    <color>10470904</color>
+                    <href>ChargeScreen%26bm%3BChargeScreen.bmml%26bm%3BChargeScreen.bmml%26bm%3BChargeScreen.bmml</href>
+                    <icon>BatteryIcon%7Csmall</icon>
+                    <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22202%2C623%2C298%2C664%22%20href%3D%22ChargeScreen.bmml%22%20alt%3D%22ChargeScreen%22%20id%3D%224%22/%3E</map>
+                    <shape>rectangle</shape>
+                    <size>13</size>
+                    <text>Charge</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="1" controlTypeID="__group__" x="14" y="81" w="377" h="39" measuredW="377" measuredH="39" zOrder="1" locked="false" isInGroup="0">
+          <controlProperties>
+            <controlName>ga-action-bar</controlName>
+          </controlProperties>
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="377" h="39" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="1">
+              <controlProperties>
+                <borderStyle>none</borderStyle>
+                <color>14540253</color>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Icon" x="7" y="13" w="16" h="16" measuredW="16" measuredH="16" zOrder="1" locked="false" isInGroup="1">
+              <controlProperties>
+                <color>0</color>
+                <icon>GtIcon%7Cxsmall</icon>
+                <rotation>180</rotation>
+              </controlProperties>
+            </control>
+            <control controlID="12" controlTypeID="__group__" x="342" y="10" w="10" h="20" measuredW="10" measuredH="20" zOrder="2" locked="false" isInGroup="1">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="2" y="1" w="6" h="5" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="12">
+                  <controlProperties>
+                    <backgroundAlpha>1</backgroundAlpha>
+                    <borderStyle>none</borderStyle>
+                    <color>0</color>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="2" y="7" w="6" h="5" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="12">
+                  <controlProperties>
+                    <backgroundAlpha>1</backgroundAlpha>
+                    <borderStyle>none</borderStyle>
+                    <color>0</color>
+                  </controlProperties>
+                </control>
+                <control controlID="2" controlTypeID="com.balsamiq.mockups::Canvas" x="2" y="14" w="6" h="5" measuredW="100" measuredH="70" zOrder="3" locked="false" isInGroup="12">
+                  <controlProperties>
+                    <backgroundAlpha>1</backgroundAlpha>
+                    <borderStyle>none</borderStyle>
+                    <color>0</color>
+                  </controlProperties>
+                </control>
+                <control controlID="4" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="10" h="20" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="12">
+                  <controlProperties>
+                    <backgroundAlpha>0</backgroundAlpha>
+                    <borderStyle>none</borderStyle>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Component" x="455" y="201" w="378" h="32" measuredW="378" measuredH="32" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2214%2C121%2C201%2C153%22%20href%3D%22Saver.ModeScreen.bmml%22%20alt%3D%22Saver.ModeScreen%22%20id%3D%222%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22201%2C121%2C388%2C153%22%20href%3D%22Saver.ModeScreen.bmml%22%20alt%3D%22Saver.ModeScreen%22%20id%3D%222%22/%3E</map>
+        <override controlID="0" x="0" y="0" w="378" h="32"/>
+        <override controlID="1" x="0" y="0" w="120" h="32">
+          <text/>
+        </override>
+        <override controlID="2" x="0" y="0" w="187" h="32">
+          <backgroundAlpha>0</backgroundAlpha>
+          <href>Saver.ModeScreen%26bm%3BSaver.ModeScreen.bmml%26bm%3BSaver.ModeScreen.bmml%26bm%3BSaver.ModeScreen.bmml</href>
+          <text>Mode</text>
+        </override>
+        <override controlID="3" x="187" y="0" w="191" h="32">
+          <backgroundAlpha>1</backgroundAlpha>
+          <text>Smart</text>
+        </override>
+        <src>./assets/Android%25204%2520Controls.bmml%23ga-tabs-scrollable</src>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="501" y="275" w="-1" h="-1" measuredW="176" measuredH="28" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>Enable%20smart%20mode</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Component" x="734" y="278" w="68" h="25" measuredW="68" measuredH="25" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/Android%25204%2520Controls.bmml%23ga-switch-on</src>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Label" x="501" y="305" w="-1" h="-1" measuredW="18" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>13</size>
+        <text>On</text>
+      </controlProperties>
+    </control>
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::Label" x="521" y="363" w="-1" h="-1" measuredW="193" measuredH="18" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>10</size>
+        <text>Automatically%20clear%20apps%20when%20screen%20lock</text>
+      </controlProperties>
+    </control>
+    <control controlID="25" controlTypeID="__group__" x="501" y="344" w="204" h="25" measuredW="204" measuredH="25" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>ga-checkbox-selected</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::CheckBox" x="0" y="0" w="-1" h="-1" measuredW="204" measuredH="25" zOrder="0" locked="false" isInGroup="25">
+          <controlProperties>
+            <bold>true</bold>
+            <color>0</color>
+            <italic>false</italic>
+            <size>16</size>
+            <state>selected</state>
+            <text>Screen%20Lock%20Auto-Clear</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="26" controlTypeID="__group__" x="501" y="386" w="173" h="22" measuredW="173" measuredH="22" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>ga-checkbox</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::CheckBox" x="0" y="0" w="173" h="22" measuredW="147" measuredH="25" zOrder="0" locked="false" isInGroup="26">
+          <controlProperties>
+            <bold>true</bold>
+            <color>0</color>
+            <italic>false</italic>
+            <size>16</size>
+            <text>Auto-Clear%20Apps</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="27" controlTypeID="__group__" x="501" y="428" w="151" h="25" measuredW="151" measuredH="25" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>ga-checkbox-selected</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::CheckBox" x="0" y="0" w="-1" h="-1" measuredW="151" measuredH="25" zOrder="0" locked="false" isInGroup="27">
+          <controlProperties>
+            <bold>true</bold>
+            <color>0</color>
+            <italic>false</italic>
+            <size>16</size>
+            <state>selected</state>
+            <text>Schedule%20by%20time</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="28" controlTypeID="__group__" x="501" y="468" w="163" h="25" measuredW="163" measuredH="25" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>ga-checkbox-selected</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::CheckBox" x="0" y="0" w="-1" h="-1" measuredW="163" measuredH="25" zOrder="0" locked="false" isInGroup="28">
+          <controlProperties>
+            <bold>true</bold>
+            <color>0</color>
+            <italic>false</italic>
+            <size>16</size>
+            <state>selected</state>
+            <text>Schedule%20by%20power</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="29" controlTypeID="__group__" x="501" y="508" w="144" h="25" measuredW="144" measuredH="25" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>ga-checkbox-selected</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::CheckBox" x="0" y="0" w="-1" h="-1" measuredW="144" measuredH="25" zOrder="0" locked="false" isInGroup="29">
+          <controlProperties>
+            <bold>true</bold>
+            <color>0</color>
+            <italic>false</italic>
+            <size>16</size>
+            <state>selected</state>
+            <text>Network%20Control</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="30" controlTypeID="__group__" x="501" y="549" w="259" h="22" measuredW="259" measuredH="22" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <controlName>ga-checkbox</controlName>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::CheckBox" x="0" y="0" w="259" h="22" measuredW="186" measuredH="25" zOrder="0" locked="false" isInGroup="30">
+          <controlProperties>
+            <bold>true</bold>
+            <color>0</color>
+            <italic>false</italic>
+            <size>16</size>
+            <text>Lower%20CPU%20frequency</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::Label" x="521" y="565" w="-1" h="-1" measuredW="193" measuredH="18" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>10</size>
+        <text>Lower%20CPU%20frequency%20when%20screen%20locked</text>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Label" x="521" y="404" w="-1" h="-1" measuredW="190" measuredH="18" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>10</size>
+        <text>Clearing%20backgroup%20apps%20can%20save%20power</text>
+      </controlProperties>
+    </control>
+    <control controlID="33" controlTypeID="com.balsamiq.mockups::Label" x="521" y="446" w="-1" h="-1" measuredW="168" measuredH="18" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>10</size>
+        <text>Change%20modes%20based%20on%20time%20of%20day</text>
+      </controlProperties>
+    </control>
+    <control controlID="34" controlTypeID="com.balsamiq.mockups::Label" x="521" y="486" w="-1" h="-1" measuredW="188" measuredH="18" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>10</size>
+        <text>Change%20modes%20according%20to%20battery%20level</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::Label" x="521" y="527" w="-1" h="-1" measuredW="210" measuredH="18" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>10</size>
+        <text>Automatically%20disable%20network%20when%20screen%20off</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

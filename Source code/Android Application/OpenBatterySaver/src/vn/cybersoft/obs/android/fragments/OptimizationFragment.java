@@ -50,6 +50,13 @@ public class OptimizationFragment extends Fragment {
 	private FragmentTabHost mTabHost;
     //private ViewPager mViewPager;
     //private OptimizationPagerAdapter mTabsAdapter;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		getActivity().setTitle(getString(R.string.app_name) + 
+				" > " + getString(R.string.optimization));
+	}
     
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

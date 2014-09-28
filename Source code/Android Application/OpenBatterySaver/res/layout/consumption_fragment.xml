@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 IUH €yber$oft Team
+<!--
+     Copyright (C) 2014 IUH €yber$oft Team
 
 	 Licensed under the Apache License, Version 2.0 (the "License"); 
 	 you may not use this file except in compliance with the License. 
@@ -17,6 +18,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:drawSelectorOnTop="false" />
+
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/white"
+        android:gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/no_items_display"
+        android:textColor="@drawable/black"
+        android:textSize="21sp" />
 
 </LinearLayout>

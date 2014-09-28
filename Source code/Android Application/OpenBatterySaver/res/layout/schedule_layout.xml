@@ -20,7 +20,7 @@
     android:orientation="vertical" >
 
     <LinearLayout
-        android:id="@+id/add_time_schedule"
+        android:id="@+id/add_schedule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:duplicateParentState="true"
-            android:text="@string/add_new_schedule_mode_time"
+            android:text="@string/add_new_schedule"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="?android:attr/textColorPrimary" />
     </LinearLayout>

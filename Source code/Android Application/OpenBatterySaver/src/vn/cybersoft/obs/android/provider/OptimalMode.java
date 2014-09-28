@@ -16,21 +16,21 @@ package vn.cybersoft.obs.android.provider;
 import java.util.LinkedList;
 import java.util.List;
 
+import vn.cybersoft.obs.android.utilities.DeviceUtils;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.v4.content.CursorLoader;
 
 /**
  * @author Luan Vu
  *
  */
-public class OptimalMode implements Parcelable, DataProviderApi.OptimalModesColumns {
+public class OptimalMode implements /*Parcelable */ DataProviderApi.OptimalModesColumns {
+    public static final String EXTRA_ID = "optimal_mode_id"; 
 	
     public static final long INVALID_ID = -1;
     /**
@@ -111,8 +111,8 @@ public class OptimalMode implements Parcelable, DataProviderApi.OptimalModesColu
      * @return cursor loader with all the optimal modes.
      */
     public static CursorLoader getModesCursorLoader(Context context) {
-        return new CursorLoader(context, DataProviderApi.OptimalModesColumns.CONTENT_URI,
-                QUERY_COLUMNS, null, null, DEFAULT_SORT_ORDER);
+        return new CursorLoader(context, DataProviderApi.OptimalModesColumns.CONTENT_URI, 
+        		QUERY_COLUMNS, null, null, DEFAULT_SORT_ORDER);
     }
     
     /**
@@ -173,8 +173,19 @@ public class OptimalMode implements Parcelable, DataProviderApi.OptimalModesColu
 
         return result;
     }
+    
+    private static String generalModeName() {
+    	Cursor c = null;
+    	
+    	try {
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    	
+    	return "";
+    }
 	
-	public static final Parcelable.Creator<OptimalMode> CREATOR = new Parcelable.Creator<OptimalMode>() {
+/*	public static final Parcelable.Creator<OptimalMode> CREATOR = new Parcelable.Creator<OptimalMode>() {
 
 		@Override
 		public OptimalMode createFromParcel(Parcel p) {
@@ -186,9 +197,9 @@ public class OptimalMode implements Parcelable, DataProviderApi.OptimalModesColu
 			return new OptimalMode[size];
 		}
 
-	};
+	};*/
 	
-	@Override
+/*	@Override
 	public int describeContents() {
 		return 0;
 	}
@@ -206,7 +217,7 @@ public class OptimalMode implements Parcelable, DataProviderApi.OptimalModesColu
 		p.writeInt(bluetooth ? 1 : 0);
 		p.writeInt(sync ? 1 : 0);
 		p.writeInt(hapticFeedback ? 1 : 0);
-	}
+	}*/
 	
 	public long id;
 	public String name;
@@ -217,10 +228,12 @@ public class OptimalMode implements Parcelable, DataProviderApi.OptimalModesColu
 	public boolean vibrate;
 	public boolean wifi;
 	public boolean bluetooth;
+	/* not use yet */ 
+	public boolean mobileData;
 	public boolean sync;
 	public boolean hapticFeedback;
 	
-    public OptimalMode(Parcel p) {
+/*    public OptimalMode(Parcel p) {
     	id = p.readInt();
     	name = p.readString();
     	desc = p.readString();
@@ -232,6 +245,18 @@ public class OptimalMode implements Parcelable, DataProviderApi.OptimalModesColu
     	bluetooth = p.readInt() == 1;
     	sync = p.readInt() == 1;
     	hapticFeedback = p.readInt() == 1;
+    }*/
+    
+    public OptimalMode() {
+    	id = -1;
+    	canEdit = true;
+    	screenBrightness = DeviceUtils.getScreenBrightness();
+    	screenTimeout = DeviceUtils.getScreenTimeoutInMillis();
+    	vibrate = true;
+    	wifi = true;
+    	bluetooth = true;
+    	sync = true;
+    	hapticFeedback = true;
     }
 	
 	public OptimalMode(Cursor c) {
@@ -250,7 +275,7 @@ public class OptimalMode implements Parcelable, DataProviderApi.OptimalModesColu
 	
 	public OptimalMode(int id, String name, String desc, boolean canEdit,
 			int screenBrightness, int screenTimeout, boolean vibrate,
-			boolean wifi, boolean bluetooth, boolean sync,
+			boolean wifi, boolean bluetooth, boolean mobileData, boolean sync,
 			boolean hapticFeedback) {
 		this.id = id;
 		this.name = name;
@@ -261,6 +286,7 @@ public class OptimalMode implements Parcelable, DataProviderApi.OptimalModesColu
 		this.vibrate = vibrate;
 		this.wifi = wifi;
 		this.bluetooth = bluetooth;
+		this.mobileData = mobileData;
 		this.sync = sync;
 		this.hapticFeedback = hapticFeedback;
 	}

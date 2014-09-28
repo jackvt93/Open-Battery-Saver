@@ -31,6 +31,12 @@ public class ChargeFragment extends Fragment {
 	public static final int LAYOUT_ID = R.layout.charge_fragment; 
 	
 	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		getActivity().setTitle(getString(R.string.app_name) + " > " + getString(R.string.charge));
+	}
+	
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(LAYOUT_ID, container, false);

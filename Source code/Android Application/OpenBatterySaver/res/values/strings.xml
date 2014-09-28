@@ -12,47 +12,58 @@
 	 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
 	 See the License for the specific language governing permissions and 
 	 limitations under the License. 
+	 
 -->
-<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="app_name">Open Battery Saver</string>
     <string name="add_new_mode">Add new mode</string>
     <string name="action_settings">Settings</string>
-    <string name="add_new_schedule_mode_time">Add new schedule</string>
+    <string name="add_new_schedule">Add new schedule</string>
     <string name="auto_clear_apps_screen_lock_title">Screen Lock Auto-Clear</string>
     <string name="auto_clear_apps_screen_lock_summany">Automatically clear apps when screen lock</string>
     <string name="auto_clear_apps_title">Auto-Clear Apps</string>
     <string name="auto_clear_apps_summany">Clearing apps on background can save battery</string>
     <string name="delete_schedule">Delete schedule</string>
     <string name="delete_schedule_confirm">This schedule will be deleted.</string>
-    <string name="save_schedule_err">You should select one mode for schedule</string>
+    <string name="save_opt_mode_err">The mode name must not empty</string>
+    <string name="save_schedule_unknow_err">Can not save schedule</string>
+    <string name="save_schedule_mode_empty_err">You must select mode for schedule</string>
+    <string name="save_schedule_power_empty_err">Please input battery level for this schedule</string>
     <string name="enable_schedule">Turn schedule on</string>
     <string name="disable_schedule">Turn schedule off</string>
     <string name="edit_schedule">Edit schedule</string>
     <string name="time_schedule_repeat">Repeat</string>
-    <string name="time_schedule_mode">Mode</string>
+    <string name="schedule_mode">Mode</string>
     <string name="time">Time</string>
-    <string name="menu_battery_info">Battery</string>
-    <string name="menu_caption_optimization">Optimization</string>
-    <string name="menu_caption_charge">Charge</string>
-    <string name="menu_caption_consumption">Consumption</string>
-    <string name="menu_second_caption_help">Help</string>
-    <string name="menu_second_caption_about">About</string>
+    <string name="battery_info">Battery Info</string>
+    <string name="optimization">Optimization</string>
+    <string name="charge">Charge</string>
+    <string name="consumption">Consumption</string>
+    <string name="help">Help</string>
+    <string name="about">About</string>
+    <string name="schedule_by_time">Schedule by time</string>
+    <string name="schedule_by_power">Schedule by power</string>
+    <string name="add_new_power_schedule">Add new Power-Schedule</string>
+    <string name="add_new_time_schedule">Add new Time-Schedule</string>
+    <string name="edit_power_schedule">Edit Power-Schedule</string>
+    <string name="edit_time_schedule">Edit Time-Schedule</string>
     <string name="mode_desc_short">User this mode if you want device always high performance</string>
     <string name="mode_desc_long">This mode should used if you want save battery</string>
     <string name="mode_desc_middle">This mode is middle</string>
     <string name="mode_name_short">Short</string>
     <string name="mode_name_long">Long</string>
     <string name="mode_name_middle">Middle</string>
-    <string name="mode_schedules_summany">Automatically change modes based on time of day</string>
-    <string name="mode_schedules_title">Change modes by time of day</string>
+    <string name="time_schedule_summany">Automatically change modes based on time of day</string>
+    <string name="time_schedule_title">Change modes by time of day</string>
     <string name="none">None</string>
     <string name="seconds">%d seconds</string>
     <string name="percent_value">%1$d %%</string>
     <string name="smart_enable">Smart optimization enable</string>
-    <string name="schedule_by_battery_level_summany">Automatically change modes according to battery level</string>
-    <string name="schedule_by_battery_level_title">Change modes by battery level</string>
+    <string name="power_schedule_summany">Automatically change modes according to battery level</string>
+    <string name="power_schedule_title">Change modes by battery level</string>
     <string name="no_items_display_time_schedules">Nothing available to display.\n\nTry add a new schedule for battery save</string>
+    <string name="no_items_display">Nothing available to display.</string>
     <string name="save">Save</string>
     <string name="accept">Switch</string>
     <string name="cancel">Cancel</string>
@@ -83,20 +94,47 @@
     <string name="celsius_symbol">\u2103</string>
     <string name="voltage_symbol">V</string>
     <string name="capacity_symbol">mAh</string>
-    <string name="button_optimize">Optimize</string>
+    <string name="button_optimize">Clean up</string>
     <string name="time_left">Time left: </string>
+    <string name="charging_time_left">Charging time left: </string>
+    <string name="battery_usage_empty">Battery usage tracing and will be displayed here</string>
     <string name="hour_s">h</string>
     <string name="min_s">m</string>
+    <string name="mode_name">Name:</string>
+    <string name="power_level">Power: </string>
+    <string name="clean_up">Clean-up</string>
+    <string name="clean_up_confirm">Do you want clean-up ?</string>
+    <string name="clean_up_result">Clean-up Result</string>
+    <string name="cleaning">Cleaning</string>
+    <string name="please_wait">Please wait a few moments.</string>
+    <string name="clean_done">Clean-up done.</string>
+    
+    <string name="missed_mode_has_been_deleted">Your missed mode has been deleted</string>
+    
+    <!-- Strings for power schedule prefs -->
+    <string name="pref_power_schedule_title">Schedule by Battery Level</string>
+    <string name="pref_power_schedule_level_title">Battery level</string>
     
     <!-- Strings for optimal mode preferences -->
-    <string name="prefs_add_new_mode_title">Add new mode</string>
-    <string name="prefs_screen_brightness_title"></string>
-    <string name="prefs_screen_timeout_title"></string>
+    <string name="pref_add_new_mode_title">Add new mode</string>
+    <string name="pref_screen_brightness_title">Screen Brightness</string>
+    <string name="pref_vibrate_title">Vibrate</string>
+    <string name="pref_wifi_title">Wifi</string>
+    <string name="pref_bluetooth_title">Bluetooth</string>
+    <string name="pref_mobile_data_title">Mobile Data</string>
+    <string name="pref_sync_title">Sync</string>
+    <string name="pref_haptic_feedback_title">Haptic Feedback</string>
+    <string name="pref_screen_timeout_summary"></string>
+    <string name="pref_screen_brightness_summary"></string>
+    <string name="pref_desc_title">Description</string>
+    <string name="pref_default_mode_name">Custom Mode %d</string>
+    <string name="pref_default_desc">This mode custom by User</string>
     
     <!-- Strings for optimal mode context menu -->
     <string name="edit_mode">Edit mode</string>
     <string name="delete_mode">Delete mode</string>
     <string name="switch_mode">Switch</string>
+    <string name="delete_mode_confirm">This mode will be deleted.</string>
 
     <!-- Strings for possible PreferenceActivity Back/Next buttons -->
     <string name="back_button_label">Back</string>
@@ -104,5 +142,120 @@
 
     <!-- Optional button to Skip a PreferenceActivity [CHAR LIMIT=20] -->
     <string name="skip_button_label">Skip</string>
-
+    
+    <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="battery_info_status_unknown">Unknown</string>
+    <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="battery_info_status_charging">Charging</string>
+    <!-- Battery Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="battery_info_status_charging_ac">(AC)</string>
+    <!-- Battery Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="battery_info_status_charging_usb">(USB)</string>
+    <!-- Battery Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="battery_info_status_charging_wireless">(wireless)</string>
+    <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="battery_info_status_discharging">Not charging</string>
+    <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="battery_info_status_not_charging">Not charging</string>
+    <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="battery_info_status_full">Full</string>
+    
+    <!-- Message to show when battery usage data is not available [CHAR LIMIT=30] -->
+    <string name="power_usage_not_available">Battery usage data isn\'t available.</string>
+    <!-- Display the battery level and status [CHAR_LIMIT=30] -->
+    <string name="power_usage_level_and_status"><xliff:g id="level">%1$s</xliff:g> - <xliff:g id="status">%2$s</xliff:g></string>
+	<!-- Battery usage since unplugged -->
+    <string name="battery_since_unplugged">Battery use since unplugged</string>
+    
+     <!-- Representation of a numerical percentage. [CHAR LIMIT=8] -->
+    <string name="percentage"><xliff:g id="number" example="30">%d</xliff:g>%%</string>
+    
+    <!-- Description for standby detail -->
+    <string name="battery_desc_standby" product="tablet">Battery used when tablet is idle</string>
+    <!-- Description for standby detail -->
+    <string name="battery_desc_standby" product="default">Battery used when phone is idle</string>
+    
+    <!-- Description for cell radio detail -->
+    <string name="battery_desc_radio">Battery used by cell radio</string>
+    
+    <!-- Description for voice call detail -->
+    <string name="battery_desc_voice">Battery used by voice calls</string>
+    
+    <!-- Description for wifi connectivity -->
+    <string name="battery_desc_wifi">Battery used by Wi\u2011Fi</string>
+    
+    <!-- Description for bluetooth power consumption detail -->
+    <string name="battery_desc_bluetooth">Battery used by Bluetooth</string>
+    
+    <!-- Description for power consumed by display -->
+    <string name="battery_desc_display">Battery used by the display and backlight</string>
+    
+    <!-- [CHAR LIMIT=50] Description for power consumed by applications -->
+    <string name="battery_desc_apps">Battery used by app</string>
+    
+    <!-- [CHAR LIMIT=50] Description for power consumed by users -->
+    <string name="battery_desc_users">Battery used by user</string>
+    
+        <!-- Label for CPU usage time -->
+    <string name="usage_type_cpu">CPU total</string>
+    <!-- Label for CPU usage in foreground -->
+    <string name="usage_type_cpu_foreground">CPU foreground</string>
+    <!-- [CHAR LIMIT=25] Label for keeping device from sleeping -->
+    <string name="usage_type_wake_lock">Keep awake</string>
+    <!-- Label for GPS usage time -->
+    <string name="usage_type_gps">GPS</string>
+    <!-- [CHAR LIMIT=25] Label for WIFI usage time -->
+    <string name="usage_type_wifi_running">Wi\u2011Fi running</string>
+    <!-- Label for Phone usage time -->
+    <string name="usage_type_phone" product="tablet">Tablet</string>
+    <!-- Label for Phone usage time -->
+    <string name="usage_type_phone" product="default">Phone</string>
+    <!-- Label for mobile network data sent [CHAR LIMIT=32] -->
+    <string name="usage_type_data_send">Mobile data sent</string>
+    <!-- Label for mobile network data received [CHAR LIMIT=32] -->
+    <string name="usage_type_data_recv">Mobile data received</string>
+    <!-- Label for Wi-Fi network data sent [CHAR LIMIT=32] -->
+    <string name="usage_type_data_wifi_send">Wi\u2011Fi data sent</string>
+    <!-- Label for Wi-Fi network data received [CHAR LIMIT=32] -->
+    <string name="usage_type_data_wifi_recv">Wi\u2011Fi data received</string>
+    <!-- Label for Audio usage time -->
+    <string name="usage_type_audio">Audio</string>
+    <!-- Label for Video usage time -->
+    <string name="usage_type_video">Video</string>
+    <!-- Label for time that a feature has been on -->
+    <string name="usage_type_on_time">Time on</string>
+    <!-- Label for time that there was no cell coverage -->
+    <string name="usage_type_no_coverage">Time without a signal</string>
+    
+    <!-- Activity title for battery usage history details -->
+    <string name="history_details_title">History details</string>
+    
+    <!-- Activity title for battery usage details for an app. or power consumer -->
+    <string name="details_title">Use details</string>
+    
+    <!-- Label for power consumed by the screen -->
+    <string name="power_screen">Screen</string>
+    <!-- Label for power consumed by Wi-Fi -->
+    <string name="power_wifi">Wi\u2011Fi</string>
+    <!-- Label for power consumed by Bluetooth -->
+    <string name="power_bluetooth">Bluetooth</string>
+    <!-- Label for power consumed by Cell idle -->
+    <string name="power_cell">Cell standby</string>
+    <!-- Label for power consumed by Calling -->
+    <string name="power_phone">Voice calls</string>
+    <!-- Label for power consumed when Idle -->
+    <string name="power_idle" product="tablet">Tablet idle</string>
+    <!-- Label for power consumed when Idle -->
+    <string name="power_idle" product="default">Phone idle</string>
+    
+        <!-- [CHAR LIMIT=NONE] Label of a running process that represents another user -->
+    <string name="running_process_item_user_label">User: <xliff:g id="user_name">%1$s</xliff:g></string>
+    <!-- [CHAR LIMIT=NONE] Label of a running process that represents a removed -->
+    <string name="running_process_item_removed_user_label">Removed user</string>
+    
+        <!-- Label for kernel threads -->
+    <string name="process_kernel_label">Android OS</string>
+    <!-- Label for mediaserver process -->
+    <string name="process_mediaserver_label">Mediaserver</string>
+    
 </resources>

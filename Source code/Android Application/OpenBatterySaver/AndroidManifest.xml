@@ -12,31 +12,37 @@
 	 distributed under the License is distributed on an "AS IS" BASIS, 
 	 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
 	 See the License for the specific language governing permissions and 
-	 limitations under the License. 
+	 limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="vn.cybersoft.obs.android"
-    android:versionCode="12"
-    android:versionName="1.0" >
+    android:versionCode="14"
+    android:versionName="1.0.8" >
 
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
-    
-	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
 
     <application
         android:name="vn.cybersoft.obs.android.application.OBS"
@@ -52,7 +58,7 @@
 
         <activity
             android:name="vn.cybersoft.obs.android.activities.MainActivity"
-            android:label="@string/app_name" 
+            android:label="@string/app_name"
             android:launchMode="singleInstance" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,36 +66,59 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <receiver 
-            android:name=".receivers.TimeScheduleReceiver" >
+
+        <receiver
+            android:name=".receivers.TimeScheduleReceiver"
+            android:exported="false" >
             <intent-filter>
-         	    <action android:name="vn.cybersoft.obs.android.intent.action.SCHEDULE_MODE" /> 
+                <action android:name="vn.cybersoft.obs.android.intent.action.EXECUTE_TIME_SCHEDULE" />
             </intent-filter>
         </receiver>
-        
-        <receiver 
-            android:name=".receiver.ScheduleInitReceiver">
+        <receiver
+            android:name=".receivers.BatteryTraceReceiver"
+            android:exported="false" >
             <intent-filter>
-				<action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="vn.cybersoft.obs.android.intent.action.BATTERY_TRACE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receivers.TimeScheduleInitReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.TIME_SET" />
                 <action android:name="android.intent.action.TIMEZONE_CHANGED" />
                 <action android:name="android.intent.action.LOCALE_CHANGED" />
             </intent-filter>
         </receiver>
-
-        <service android:name=".services.BatteryStatusService" />
-        <service
-            android:name=".services.TimeScheduleRunner" >
+        <receiver android:name=".receivers.BatteryChangeReceiver" >
             <intent-filter>
-                <action android:name="vn.cybersoft.obs.android.intent.action.SCHEDULE_MODE" />
+                <action android:name="android.intent.action.BATTERY_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".services.NotificationService" />
+        <service android:name="vn.cybersoft.obs.andriod.batterystats2.service.UMLoggerService" />
+        <service
+            android:name=".services.TimeScheduleExecutorService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="vn.cybersoft.obs.android.intent.action.EXECUTE_TIME_SCHEDULE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".services.PowerScheduleExecutorService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="vn.cybersoft.obs.android.intent.action.EXECUTE_POWER_SCHEDULE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".services.BatteryTraceService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="vn.cybersoft.obs.android.intent.action.BATTERY_TRACE" />
             </intent-filter>
         </service>
 
-        <activity
-            android:name="vn.cybersoft.obs.android.activities.MessageBoxActivity"
-            android:theme="@style/MessageBoxTheme" >
-        </activity>
         <activity
             android:name="vn.cybersoft.obs.android.activities.SwitchModeConfirmActivity"
             android:theme="@style/MessageBoxTheme" >
@@ -101,10 +130,29 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name="vn.cybersoft.obs.android.activities.PowerScheduleActivity" >
+            <intent-filter>
+                <action android:name="vn.cybersoft.obs.android.activities.PowerScheduleActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.SetPowerScheduleActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|navigation" >
+        </activity>
         <activity
             android:name=".activities.SetTimeScheduleActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|navigation" >
         </activity>
+        <activity
+            android:name=".activities.SetOptimalModeActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|navigation"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        
+        <activity 
+            android:name=".activities.CleanerActivity"></activity>
     </application>
 
 </manifest>
